@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p5.js example</title>
+  <style>
+    body {
+      padding: 0;
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+  </style>
+  <script src="p5.min.js"></script>
+  <script src="sketch.js"></script>
+  <script src="colours.js"></script>
+  <script src="player.js"></script>
+  <script src="GUI.js"></script>
+  <script src="slider.js"></script>
+</head>
+
+<body>
+  <button>Save File</button>
+  <button>Load File</button>
+  <button>Export as GIF</button>
+  <div id="animationContainer"></div>
+  <button onclick="saveLocations()">Save Frame</button>
+  <button onclick="playPause()" id="playButton">Play</button>
+  <button onclick="addNewFrame()">Add Frame</button>
+  <button onclick="deleteFrame()">Delete Frame</button>
+  <br>
+  <input type="number" id="shirtNumberInput" min="1" max="20" oninput="changeNumber()">
+   <select id="shirtColourInput" onchange="changeColour()">
+    <option value="0">Red</option>
+    <option value="1">Blue</option>
+    <option value="2">Black</option>
+  </select>
+  <input type="checkbox" id="drawLinesCheckbox" onchange="changeLineDrawing()">
+  <button onclick="addPlayer()">Add Player</button>
+  <button onclick="deletePlayer()">Delete Player</button>
+</body>
+
+</html>
