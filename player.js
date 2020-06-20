@@ -122,7 +122,7 @@ class Player {
       
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
-      if (touch) this.offsetY -= 40;
+      if (touch) this.offsetY -= 60;
     }
   }
 
