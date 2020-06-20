@@ -8,14 +8,15 @@
   <style>
     body {
       padding: 0;
-      margin-top: 30px;
-      margin-left: 30px;
+      margin:0px    ;
+      touch-action: none;
     }
   </style>
   <script src="p5.min.js"></script>
   <script src="sketch.js"></script>
   <script src="colours.js"></script>
   <script src="player.js"></script>
+  <script src="ball.js"></script>
   <script src="GUI.js"></script>
   <script src="slider.js"></script>
 </head>
@@ -39,6 +40,11 @@
   <input type="checkbox" id="drawLinesCheckbox" onchange="changeLineDrawing()">
   <button onclick="addPlayer()">Add Player</button>
   <button onclick="deletePlayer()">Delete Player</button>
+  <br>
+  <input type="range" min="1" max="100" value="50" id="globalSpeedSlider" onchange="updateGlobalSliderIncrement()">
+  <br>
+  <p> Drawing Mode </p>  
+  <input type="checkbox" id="drawLinesCheckbox" onchange="changeLineDrawing()">
 </body>
 
 </html>

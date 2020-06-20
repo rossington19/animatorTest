@@ -8,7 +8,6 @@ function drawGUI(){
 		slider.play();
 	}
 	slider.drawDot();
-	drawSelected();
 }
 
 function refreshSelectionInDOM(){
@@ -64,7 +63,11 @@ function changeColour(){
 }
 
 function setInputColourToSelected(){
-
+	let shirtColourInput = select('#shirtColourInput');
+	if(selected != undefined){ 
+		let selectedPlayer =  player.find(x => x.index === selected);
+		shirtColourInput.value(selectedPlayer.col);
+	}
 }
 
 function changeLineDrawing(){
@@ -89,34 +92,10 @@ function setLineCheckBoxToSelected(){
 
 function addPlayer(){
 	let prevPlayerIndex = player[ player.length - 1].index;
-	numOfPlayers++;
-	player.push( new Player(prevPlayerIndex+1) )
-}
-
-function drawSelected(){
-	if(selected != undefined){
-		textSize(20);
-		fill(0);
-		textAlign(LEFT)
-		text("Selected:", pitchMargin, 650);
-		let selectedPlayer =  player.find(x => x.index === selected);
-		fill(colours[selectedPlayer.col][2]);
-		stroke(0);
-		strokeWeight(1);
-		circle(145, 650, selectedPlayer.r)
-		noStroke();
-	    textAlign(CENTER, CENTER);
-	    textSize(25);
-	    fill(255);
-	  	text(selectedPlayer.displayNumber, 145, 650);
-
-	  	drawColourOptions(selectedPlayer);
-	 //  	textSize(20);
-		// fill(0);
-		// textAlign(LEFT)
-		// text("Lines:", pitchMargin, 750);
+	if(numOfPlayers < 30){
+		numOfPlayers++;
+		player.push( new Player(prevPlayerIndex+1) )
 	}
-
 }
 
 function drawColourOptions(selectedPlayer){
@@ -126,4 +105,10 @@ function drawColourOptions(selectedPlayer){
 		strokeWeight(1);
 		circle(220+(i*40), 650, selectedPlayer.r)
 	}
+}
+
+function updateGlobalSliderIncrement(){
+	let speedInput = select('#globalSpeedSlider');
+	let newInc = map(speedInput.value(), 1, 100, 0.002, 0.035)
+	slider.increment = newInc;
 }

@@ -1,21 +1,13 @@
-class Player {
+class Ball {
 	constructor(num) {
     this.dragging = false;
     this.rollover = false;
-    this.index = num;
-    this.displayNumber = num+1;
-    this.x = 50+(num*30);
-    this.y = height-80;
+    this.x = width/2;
+    this.y = height/2;
+    this.r = 19;
 
-    this.r = 25;
     this.col = 0;
     this.showLines = false;
-    if(num > 14){ 
-      this.y -= 30;  
-      this.x = 50+((num-15)*30);
-      this.displayNumber -= 15;
-      this.col = 1;
-    }
     this.key = new Array();
     for(let i = 0; i < maxNumOfKeyFrames; i++){
       this.key[i] = [this.x, this.y, false]
@@ -65,18 +57,12 @@ class Player {
 
   show() {
     stroke(0);
-    if (this.dragging) { fill(colours[this.col][0]);
-    } else if (this.rollover) { fill(colours[this.col][1]);
-    } else { fill(colours[this.col][2]);
+    if (this.dragging) { fill(215);
+    } else if (this.rollover) { fill(235);
+    } else { fill(255);
     }
     
-    circle(this.x, this.y, this.r)
-   
-    noStroke();
-    textAlign(CENTER, CENTER);
-    textSize(20);
-    fill(255);
-  	text(this.displayNumber, this.x, this.y+1);
+    ellipse(this.x, this.y, 13, 19)
   }
 
   drawLines(){

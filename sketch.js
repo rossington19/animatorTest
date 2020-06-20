@@ -20,7 +20,7 @@ var colours;
 // }
 
 function setup() {
-	canvas = createCanvas(540,700);
+	canvas = createCanvas(540,600);
 	canvas.parent("animationContainer");
 	colours = defineColours();
 	noStroke();
@@ -29,6 +29,7 @@ function setup() {
 	}
 	slider = new Slider();
 	setupButtons();
+	ball = new Ball()
 }
 
 function draw() {
@@ -46,6 +47,9 @@ function draw() {
 		player[i].over();
 		player[i].show();
 	}
+	ball.update();
+	ball.over();
+	ball.show();
 	displayKeyframe = keyframe;
 	refreshKeyframe = false;
 }
@@ -58,14 +62,16 @@ function drawPitch(){
 
 function saveLocations(){
 	for(var i = 0; i < numOfPlayers; i++){
-		player[i].save(keyframe);
+		player[i].save();
 	}
+	ball.save();
 }
 
 function calculateLocations(time){
 	for(var i = 0; i < numOfPlayers; i++){
 		player[i].goToLocation(time);
 	}
+	ball.goToLocation(time);
 }
 
 
@@ -79,6 +85,7 @@ function mousePressed() {
 		}
 	}
 	slider.pressed();
+	ball.pressed();
 	refreshSelectionInDOM();
 }
 
@@ -89,6 +96,7 @@ function mouseReleased() {
 		player[i].released();
 	}
 	slider.released();
+	ball.released();
 }
 
 

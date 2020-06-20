@@ -1,11 +1,12 @@
 class Slider{
 	constructor(){
 		this.margin = 30;
-		this.yLocation = 600;
+		this.yLocation = 570;
 		this.lineLength = width - (2*this.margin)
 		this.dotXLoc = this.margin + keyframe*(this.lineLength/(totalKeyFrame-1));
 		this.dragged = false;
-		this.size = 20
+		this.size = 20;
+		this.increment = 0.01;
 	}
 
 
@@ -14,7 +15,7 @@ class Slider{
 		line(this.margin, this.yLocation, width-this.margin, this.yLocation);
 		for(var i = 0; i < totalKeyFrame; i++){
 			let xLocation = this.margin + i*(this.lineLength/(totalKeyFrame-1)) 
-			line(xLocation, this.yLocation + (this.size/1.5) , xLocation, this.yLocation - (this.size/1.5)   )
+			line(xLocation, this.yLocation + (this.size/1.5) , xLocation, this.yLocation - (this.size/1.5)  )
 		}
 	}
 
@@ -74,7 +75,7 @@ class Slider{
 	}
 
 	play(){
-		keyframe += 0.01;
+		keyframe += this.increment;
 		if (keyframe >= totalKeyFrame-1){
 			keyframe = 0;
 		}
