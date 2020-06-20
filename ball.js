@@ -99,7 +99,7 @@ class Ball {
 
   }
 
-  pressed() {
+  pressed(touch) {
     let fixedKeyframe = Math.floor(keyframe)
    	if ( dist(this.x, this.y, mouseX, mouseY) < this.r/2){
       this.dragging = true;
@@ -108,6 +108,7 @@ class Ball {
       
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
+      if (touch) this.offsetY -= 25;
     }
   }
 

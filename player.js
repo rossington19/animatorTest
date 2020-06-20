@@ -113,15 +113,16 @@ class Player {
 
   }
 
-  pressed() {
+  pressed(touch) {
     let fixedKeyframe = Math.floor(keyframe)
-   	if ( dist(this.x, this.y, mouseX, mouseY) < this.r/2){
+    if ( dist(this.x, this.y, mouseX, mouseY) < this.r/2){
       this.dragging = true;
       selected = this.index;
       if(!playing){ this.key[fixedKeyframe][2] = true; }
       
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
+      if (touch) this.offsetY -= 25;
     }
   }
 

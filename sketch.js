@@ -89,6 +89,20 @@ function mousePressed() {
 	refreshSelectionInDOM();
 }
 
+function touchStarted(){
+	if(mouseY < 540 + pitchMargin)
+		{selected = undefined;}
+	for(var i = 0; i < numOfPlayers; i++){
+		player[i].pressed(true);
+		if (selected != undefined){
+			break;
+		}
+	}
+	slider.pressed();
+	ball.pressed(true);
+	refreshSelectionInDOM();
+}
+
 
 
 function mouseReleased() {
