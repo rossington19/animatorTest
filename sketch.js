@@ -1,6 +1,6 @@
 
 function setup() {
-	canvas = createCanvas(displayWidth, displayHeight);
+	canvas = createCanvas(displayWidth, displayHeight-100);
 	canvas.doubleClicked(canvasDoubleClicked);
 	assignColors();
 	for(var i = 0; i < numOfPlayers; i++){
