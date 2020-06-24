@@ -1,7 +1,7 @@
 class Slider{
 	constructor(){
-		this.margin = 30;
-		this.yLocation = 570;
+		this.margin = 20;
+		this.yLocation = height - footerHeight + 25;
 		this.lineLength = width - (2*this.margin)
 		this.dotXLoc = this.margin + keyframe*(this.lineLength/(totalKeyFrame-1));
 		this.dragged = false;
@@ -9,28 +9,27 @@ class Slider{
 		this.increment = 0.01;
 	}
 
-
 	drawSlider(){
-		stroke(126);
+		push();
+		stroke(125);
+		strokeWeight(1);
 		line(this.margin, this.yLocation, width-this.margin, this.yLocation);
 		for(var i = 0; i < totalKeyFrame; i++){
 			let xLocation = this.margin + i*(this.lineLength/(totalKeyFrame-1)) 
 			line(xLocation, this.yLocation + (this.size/1.5) , xLocation, this.yLocation - (this.size/1.5)  )
 		}
+		pop();
 	}
 
 	drawDot(){
-	    if (this.dragged) {
-	    	fill(255,50,50);
-		} else if ( this.isOver() ){
-	    	fill(250,90,90);
-	    }
-		else {
-	     	fill(200,100,100);
-	    }
+		push();
+		stroke(125);
+		strokeWeight(1);
+	    fill(colourSliderDot)
 	    this.getDotLoc();
 		circle(this.dotXLoc, this.yLocation, this.size);
 		keyframe = this.convertLocToFrame();
+		pop();
 	}
 
 	getDotLoc(){
@@ -54,11 +53,6 @@ class Slider{
 		if( mouseY >  this.yLocation-this.size && mouseY < this.yLocation+this.size){
 			this.dragged = true;
 		}
-		// if (this.isOver()){
-		// 	this.dragged = true;
-		// } else {
-		// 	this.dragged = false;
-		// }
 	}
 
 	released(){

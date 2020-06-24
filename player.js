@@ -1,32 +1,17 @@
 class Player {
 	constructor(num) {
     this.dragging = false;
-    this.rollover = false;
     this.index = num;
     this.displayNumber = num+1;
-    this.x = 50+(num*30);
-    this.y = height-80;
+    this.x = 100;
+    this.y = 100;
 
-    this.r = 25;
+    this.r = 30;
     this.col = 0;
     this.showLines = false;
-    if(num > 14){ 
-      this.y -= 30;  
-      this.x = 50+((num-15)*30);
-      this.displayNumber -= 15;
-      this.col = 1;
-    }
     this.key = new Array();
     for(let i = 0; i < maxNumOfKeyFrames; i++){
       this.key[i] = [this.x, this.y, false]
-    }
-  }
-
-  over() {
-    if ( dist(this.x, this.y, mouseX, mouseY) < this.r/2 && !mouseIsPressed ){
-      this.rollover = true;
-    } else {
-      this.rollover = false;
     }
   }
 
@@ -34,10 +19,10 @@ class Player {
     if (this.dragging) {
       this.x = mouseX + this.offsetX;
       this.y = mouseY + this.offsetY;
-      if(this.x < pitchMargin + (this.r)/2+1) {this.x = pitchMargin + (this.r)/2+1}
-      if(this.x > width - pitchMargin - (this.r)/2-1) {this.x = width - pitchMargin - (this.r)/2-1}
-      if(this.y < pitchMargin + (this.r)/2+1) {this.y = pitchMargin + (this.r)/2+1}
-      if(this.y > 540 + pitchMargin - (this.r)/2-1) {this.y = 540 + pitchMargin - (this.r)/2-1}
+      if(this.x < (this.r)/2+1) {this.x = (this.r)/2+1}
+      if(this.x > width - (this.r)/2-1) {this.x = width - (this.r)/2-1}
+      if(this.y < headerHeight + (this.r)/2+1) {this.y = headerHeight + (this.r)/2+1}
+      if(this.y > height - footerHeight - (this.r)/2-1) {this.y = height - footerHeight - (this.r)/2-1}
     } else if (refreshKeyframe){
       this.calcLocation()
     }
@@ -65,16 +50,13 @@ class Player {
 
   show() {
     stroke(0);
-    if (this.dragging) { fill(colours[this.col][0]);
-    } else if (this.rollover) { fill(colours[this.col][1]);
-    } else { fill(colours[this.col][2]);
-    }
+    fill(55); //TODO
     
     circle(this.x, this.y, this.r)
    
     noStroke();
     textAlign(CENTER, CENTER);
-    textSize(20);
+    textSize(23);
     fill(255);
   	text(this.displayNumber, this.x, this.y+1);
   }
@@ -113,7 +95,7 @@ class Player {
 
   }
 
-  pressed(touch) {
+  pressed() {
     let fixedKeyframe = Math.floor(keyframe)
     if ( dist(this.x, this.y, mouseX, mouseY) < this.r/2){
       this.dragging = true;
@@ -122,7 +104,6 @@ class Player {
       
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
-      if (touch) this.offsetY -= 50;
     }
   }
 
