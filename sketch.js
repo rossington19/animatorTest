@@ -1,6 +1,6 @@
 
 function setup() {
-	canvas = createCanvas(displayWidth, displayHeight-150);
+	canvas = createCanvas(displayWidth, displayHeight - 175);
 	canvas.doubleClicked(canvasDoubleClicked);
 	assignColors();
 	for(var i = 0; i < numOfPlayers; i++){
@@ -33,14 +33,14 @@ function mousePressed() {
 }
 
 function canvasDoubleClicked() {
-	console.log("selected");
-	// selected = undefined;
-	// for(var i = numOfPlayers - 1; i >= 0; i--){
-	// 	player[i].pressed();
-	// 	if (selected != undefined){
-	// 		break;	
-	// 	}
-	// }
+	selected = undefined;
+	for(var i = numOfPlayers - 1; i >= 0; i--){
+		player[i].pressed();
+		if (selected != undefined){
+			break;	
+		}
+	}
+	alert(selected);
 
 }
 
