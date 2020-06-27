@@ -3,11 +3,10 @@ class Player {
     this.dragging = false;
     this.index = num;
     this.displayNumber = num+1;
-    this.x = 100;
+    this.x = 20 + num * 30;
     this.y = 100;
-
     this.r = 30;
-    this.col = 0;
+    this.col = 2;
     this.showLines = false;
     this.key = new Array();
     for(let i = 0; i < maxNumOfKeyFrames; i++){
@@ -50,7 +49,7 @@ class Player {
 
   show() {
     stroke(0);
-    fill(55); //TODO
+    fill(playerColours[this.col]); //TODO
     
     circle(this.x, this.y, this.r)
    
@@ -58,6 +57,9 @@ class Player {
     textAlign(CENTER, CENTER);
     textSize(23);
     fill(255);
+    if(this.col === 3 || this.col === 5){
+      fill(0)
+    }
   	text(this.displayNumber, this.x, this.y+1);
   }
 

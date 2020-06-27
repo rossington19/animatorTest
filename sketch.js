@@ -1,19 +1,20 @@
 
 function setup() {
-	canvas = createCanvas(displayWidth, displayHeight - 175);
-	canvas.doubleClicked(canvasDoubleClicked);
+	canvas = createCanvas(displayWidth, displayHeight - 150);
+	canvas.parent("canvasContainer")
 	assignColors();
 	for(var i = 0; i < numOfPlayers; i++){
 		player.push(new Player(i));
 	}
 	slider = new Slider();
-	// setupHeader();
+	setupHeader();
 	// setupBody();
 	setupFooter();
+	populateColorsOfOptions();
 }
 
 function draw() {
-	background(colorGreen);
+	background(colorPitch);
 	drawHeader();
 	drawBody();
 	drawFooter();
@@ -32,17 +33,15 @@ function mousePressed() {
 	slider.pressed();
 }
 
-function canvasDoubleClicked() {
-	selected = undefined;
-	for(var i = numOfPlayers - 1; i >= 0; i--){
-		player[i].pressed();
-		if (selected != undefined){
-			break;	
-		}
+function mouseClicked(){
+	let now = new Date()
+	let delta = now - doubleClickTimer;
+	if ( delta < 250 && selected != undefined){		//Double Clicked
+		populatePlayerEdit();
 	}
-	alert(selected);
-
+	doubleClickTimer = now;
 }
+
 
 function mouseReleased() {
 	for(var i = numOfPlayers - 1; i >= 0; i--){
@@ -50,3 +49,5 @@ function mouseReleased() {
 	}
 	slider.released();
 }
+
+

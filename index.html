@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>p5.js example</title>
   <style>
     * {
@@ -16,17 +16,169 @@
     }
 
   </style>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="playerEditModal.css">
+  <link rel="stylesheet" type="text/css" href="addActorModal.css">
   <script src="p5.min.js"></script>
-  <script src="sketch.js"></script>
   <script src="globalVars.js"></script>
+  <script src="sketch.js"></script>
   <script src="header.js"></script>
   <script src="body.js"></script>
   <script src="footer.js"></script>
   <script src="slider.js"></script>
   <script src="player.js"></script>
+  <script src="modalFunctions.js"></script>
 </head>
 
 <body>
+
+
+  
+
+<div id="canvasContainer">
+  <div id="sideNavMenu" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSideNavMenu()">&times;</a>
+    <a href="#">Save</a>
+    <a href="#">Load</a>
+    <a href="#">Export</a>
+    <a href="#">Pitch</a>
+  </div>
+  <div id="sideNavMenuCover" class="modal" onclick="closeSideNavMenu()"></div>
+
+  <div id="headerButtonContainer">
+    <button class="headerButton" onclick="openSideNavMenu()"> Menu </button>
+    <button class="headerButton" onclick="showDomElement('addActorModal')"> Add </button>
+    <button class="headerButton"> Draw </button>
+    <button class="headerButton"> Speed </button>
+ </div>
+
+</div>
+
+
+
 </body>
+
+<footer>
+  <div id="playerEditModal" class="modal" onclick="hideDomElement('playerEditModal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="hideDomElement('playerEditModal')">
+      &times;</span>
+      <p class="modalTitle">Player Edit</p>  
+      <div class="modalBody">
+
+        <div class="showPlayer" id="selectedPlayer">19</div>
+        <p>Edit colour:</p>
+        <div class="colorOptionsContainer" id="colorOptionsPlayerEdit">
+            <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
+            <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="4" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+          </div>
+
+        <div class="modalOptionContainer">
+          <p class="modalOptionText">Edit Number:</p>
+          <input type="number" min="1" max="99" class="playerNumberInput" id="selectedPlayerInput" oninput="updateSelectedPlayerNumber('selectedPlayer', 'selectedPlayerInput')">
+        </div>
+
+         <div class="modalOptionContainer">
+          <p class="modalOptionText">Show Lines:</p>
+          <label class="switch">
+            <input type="checkbox" id="showLines">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="modalButtonContainer">
+           <button class="modalButton" onclick="applyPlayerEdits()">Apply Changes</button>
+          <button class="modalButton">Delete Player</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div id="addActorModal" class="modal" onclick="hideDomElement('addActorModal')">
+    <div class="modal-content"  onclick="event.stopPropagation()" >
+      <span class="close" onclick="hideDomElement('addActorModal')">
+      &times;</span>
+      <p class="modalTitle">Add Actor</p>  
+      <div class="modalBody">
+        <div class="modalTabContainer">
+          <button class="modalTabButton active" onclick="changeTab(event,'addPlayerContainer')">Add Player</button>
+          <button class="modalTabButton" onclick="changeTab(event,'addItemContainer')">Add Item</button>
+        </div>
+
+        <div id="addPlayerContainer" class="tabcontent">
+          <div class="showPlayer" id="playerToAdd" data-color="0">10</div>
+          <p>Edit colour:</p>
+          <div class="colorOptionsContainer" id="colorOptionsPlayerAdd">
+            <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
+            <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="4" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+          </div>
+
+          <div class="modalOptionContainer">
+            <p class="modalOptionText">Edit Number:</p>
+            <input type="number" min="1" max="99" class="playerNumberInput" id="playerToAddInput" value="10" oninput="updateSelectedPlayerNumber('playerToAdd', 'playerToAddInput')">
+          </div>
+
+           <div class="modalOptionContainer">
+            <p class="modalOptionText">Show Lines:</p>
+            <label class="switch">
+              <input type="checkbox" id="addPlayerShowLines">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="modalButtonContainer">
+             <button class="modalButton" onclick="addNewPlayer()">Add Player</button>
+          </div>
+        </div>
+
+        <div id="addItemContainer" class="tabcontent">
+          
+          <p>Select Item:</p>
+          <div id="itemOptionsContainer">
+            <div class="itemOption active"> 
+              <div class="itemImage " >  </div>
+              <p class="itemName"> Ball </p>
+            </div>
+            <div class="itemOption"> 
+              <div class="itemImage"> c </div>
+              <p class="itemName"> Cone </p>
+            </div>
+            <div class="itemOption"> 
+              <div class="itemImage"> c </div>
+              <p class="itemName"> Pad </p>
+            </div>
+          </div>
+
+          <p>Edit colour:</p>
+          <div class="colorOptionsContainer">
+            <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
+            <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="4" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+          </div>
+
+          <div class="modalButtonContainer">
+             <button class="modalButton">Add Item</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</footer>
 
 </html>

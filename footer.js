@@ -14,7 +14,6 @@ function drawFooter(){
 		fill(235);
 		rect(0, height - footerHeight, width, height)
 	pop();
-	
 	if(playing){
 		slider.play();
 	}

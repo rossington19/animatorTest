@@ -8,13 +8,23 @@ var playing = false;
 var player = [];
 var numOfPlayers = 6;
 var selected = undefined;
+var doubleClickTimer = 0;
 
 var buttonPlayAnimation, buttonSaveFrame;
-var colorGreen, colorBlack, colorRed, colorBlue, colorWhite, colourSliderDot;
+var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
+var playerColours = [];
 
 function assignColors(){
-	colorGreen = color('#469b2e');
+	colorPitch = color('#469b2e');
 	colourSliderDot = color('#f89300')
+
+	colourRed = color('#d13131');
+	colourBlue = color('#223fc8');
+	colourGreen = color('#006c04');
+	colourYellow = color('#eded1e');
+	colourBlack = color('#202020');
+	colourWhite = color('#ebebeb');
+	playerColours = [colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite];
 }
 
 var headerHeight = 40;
