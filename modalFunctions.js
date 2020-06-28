@@ -34,14 +34,16 @@ function changeColorSelection(elmnt) {
   }
   elmnt.innerHTML = "✔";
   elmnt.className += " active";
-  let x = elmnt.parentNode.parentNode.getElementsByClassName("showPlayer")[0];
+  let x = elmnt.parentNode.parentNode.getElementsByClassName("toBeAffByCol");
   let y = parseInt(elmnt.getAttribute("data-color") );
-  x.style.backgroundColor = playerColours[y];
-  x.setAttribute("data-color", y);
-  if (y === 3 || y === 5){
-    x.style.color = "black";
-  } else {
-    x.style.color = "white";
+  for(j = 0; j < x.length; j++){
+    x[j].style.backgroundColor = playerColours[y];
+    x[j].setAttribute("data-color", y);
+    if (y === 3 || y === 5){
+      x[j].style.color = "black";
+    } else {
+      x[j].style.color = "white";
+    }
   }
 }
 
@@ -63,6 +65,14 @@ function applyPlayerEdits(){
   selectedPlayer.col = parseInt(domSelectedPlayer.getAttribute("data-color"));
   selectedPlayer.showLines = document.getElementById('showLines').checked
   hideDomElement('playerEditModal')
+}
+
+function applyItemEdits(){
+  let domSelectedPlayer = document.getElementById('selectedItem');
+  itemSelected = parseInt(domSelectedPlayer.getAttribute("data-target"));
+  let selectedItemObj =  items.find(x => x.index === itemSelected);
+  selectedItemObj.col = parseInt(domSelectedPlayer.getAttribute("data-color"));
+  hideDomElement('itemEditModal')
 }
 
 function populatePlayerEdit(){
@@ -91,6 +101,32 @@ function populatePlayerEdit(){
   }
 }
 
+function populateItemEdit(){
+  document.getElementById("itemEditModal").style.display = "block";
+  let selectedItem =  items.find(x => x.index === itemSelected);
+  let domSelectedItem = document.getElementById('selectedItem');
+  // let domSelectedInput = document.getElementById('selectedPlayerInput');
+  
+  // let seletedPlayerNumber = selectedPlayer.displayNumber;
+  let selectedItemColour = selectedItem.col;
+
+  // domSelectedPlayer.innerHTML = seletedPlayerNumber;
+  // domSelectedPlayer.backgroundColor = playerColours[selectedPlayerColour];
+  // domSelectedPlayer.setAttribute("data-color", selectedPlayerColour);
+  domSelectedItem.setAttribute("data-target", itemSelected);
+  // domSelectedInput.value = seletedPlayerNumber;
+  // document.getElementById('showLines').checked = selectedPlayer.showLines
+
+  let colorOptions = document.getElementById('colorOptionsItemEdit').children;
+  let activeElem;
+  for (i = 0; i < colorOptions.length; i++) {
+    let colorNum = parseInt(colorOptions[i].getAttribute("data-color"));
+    if(colorNum === selectedItemColour){
+      changeColorSelection(colorOptions[i]);
+    }
+  }
+}
+
 function addNewPlayer(){
   let newPlayerIndex = player[ player.length - 1].index + 1;
   if(numOfPlayers < 30){
@@ -105,4 +141,28 @@ function addNewPlayer(){
 
   newPlayer.showLines = document.getElementById('addPlayerShowLines').checked;
   hideDomElement('addActorModal');
+}
+
+function addNewItem(){
+  let newItemIndex = items[ items.length - 1].index + 1;
+  if(items.length < 5){
+    items.push( new Item(newItemIndex) )
+  }
+  let newItem =  items.find(x => x.index === newItemIndex);
+  let itemToAdd = document.getElementById('itemToAdd');
+  newItem.col = parseInt(itemToAdd.getAttribute("data-color"));
+  newItem.itemType = parseInt(itemToAdd.getAttribute("data-targItemType"));
+  hideDomElement('addActorModal');
+}
+
+function changeSelectedItem(elmnt){
+  let allOptions = document.getElementsByClassName("itemOption");
+  for(i = 0; i < allOptions.length; i++){
+    allOptions[i].className = allOptions[i].className.replace(" active", "");
+  }
+  elmnt.className += " active";
+   let itemToAdd = document.getElementById('itemToAdd');
+   let typeOfItemToAdd = elmnt.children[0].getAttribute('data-thisItemType');
+   console.log(typeOfItemToAdd)
+   itemToAdd.setAttribute("data-targItemType", typeOfItemToAdd);
 }

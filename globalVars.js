@@ -7,7 +7,9 @@ var maxNumOfKeyFrames = 12;
 var playing = false;
 var player = [];
 var numOfPlayers = 6;
+var items = [];
 var selected = undefined;
+var itemSelected = undefined;
 var doubleClickTimer = 0;
 
 var buttonPlayAnimation, buttonSaveFrame;

@@ -22,11 +22,12 @@ function drawFooter(){
 }
 
 function saveLocations(){
-	console.log("saving");
 	for(var i = 0; i < numOfPlayers; i++){
 		player[i].save();
 	}
-	// ball.save();
+	for(var i = 0; i < items.length; i++){
+		items[i].save();
+	}
 }
 
 function playPause(){

@@ -27,6 +27,7 @@
   <script src="footer.js"></script>
   <script src="slider.js"></script>
   <script src="player.js"></script>
+  <script src="item.js"></script>
   <script src="modalFunctions.js"></script>
 </head>
 
@@ -66,7 +67,7 @@
       <p class="modalTitle">Player Edit</p>  
       <div class="modalBody">
 
-        <div class="showPlayer" id="selectedPlayer">19</div>
+        <div class="showPlayer toBeAffByCol" id="selectedPlayer">19</div>
         <p>Edit colour:</p>
         <div class="colorOptionsContainer" id="colorOptionsPlayerEdit">
             <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
@@ -99,7 +100,32 @@
     </div>
   </div>
 
+  <div id="itemEditModal" class="modal" onclick="hideDomElement('itemEditModal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="hideDomElement('itemEditModal')">
+      &times;</span>
+      <p class="modalTitle">Item Edit</p>  
+      <div class="modalBody">
 
+        <div class="showPlayer toBeAffByCol" id="selectedItem"></div>
+        <p>Edit colour:</p>
+        <div class="colorOptionsContainer" id="colorOptionsItemEdit">
+            <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
+            <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="4" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+          </div>
+        <div class="modalButtonContainer">
+           <!-- TODO -->
+           <button class="modalButton" onclick="applyItemEdits()">Apply Changes</button> 
+          <button class="modalButton">Delete Item</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <div id="addActorModal" class="modal" onclick="hideDomElement('addActorModal')">
     <div class="modal-content"  onclick="event.stopPropagation()" >
@@ -113,7 +139,7 @@
         </div>
 
         <div id="addPlayerContainer" class="tabcontent">
-          <div class="showPlayer" id="playerToAdd" data-color="0">10</div>
+          <div class="showPlayer toBeAffByCol" id="playerToAdd" data-color="0">10</div>
           <p>Edit colour:</p>
           <div class="colorOptionsContainer" id="colorOptionsPlayerAdd">
             <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
@@ -146,32 +172,32 @@
           
           <p>Select Item:</p>
           <div id="itemOptionsContainer">
-            <div class="itemOption active"> 
-              <div class="itemImage " >  </div>
+            <div class="itemOption active" onclick="changeSelectedItem(this)" > 
+              <div class="itemImage  toBeAffByCol" id="itemToAdd" data-thisItemType="0" data-targItemType="1" data-color="5"> </div>
               <p class="itemName"> Ball </p>
             </div>
-            <div class="itemOption"> 
-              <div class="itemImage"> c </div>
+            <div class="itemOption " onclick="changeSelectedItem(this)"> 
+              <div class="itemImage  toBeAffByCol" data-thisItemType="1" id="coneItem">  </div>
               <p class="itemName"> Cone </p>
             </div>
-            <div class="itemOption"> 
-              <div class="itemImage"> c </div>
+            <div class="itemOption " onclick="changeSelectedItem(this)"> 
+              <div class="itemImage  toBeAffByCol" data-thisItemType="2" id="padItem">  </div>
               <p class="itemName"> Pad </p>
             </div>
           </div>
 
           <p>Edit colour:</p>
           <div class="colorOptionsContainer">
-            <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
+            <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)"></div>
             <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
             <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
             <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
             <div class="colorOption" data-color="4" onclick="changeColorSelection(this)"></div>
-            <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)">✔</div>
           </div>
 
           <div class="modalButtonContainer">
-             <button class="modalButton">Add Item</button>
+             <button class="modalButton" onclick="addNewItem()">Add Item</button>
           </div>
         </div>
       </div>
