@@ -102,8 +102,9 @@ class Player {
     if ( dist(this.x, this.y, mouseX, mouseY) < this.r/2){
       this.dragging = true;
       selected = this.index;
-      if(!playing){ this.key[fixedKeyframe][2] = true; }
-      
+      if(!playing){ 
+        this.key[fixedKeyframe][2] = true; 
+      }
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
     }

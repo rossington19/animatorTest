@@ -12,6 +12,11 @@ var selected = undefined;
 var itemSelected = undefined;
 var doubleClickTimer = 0;
 
+// Drawing shit
+var drawingMode = false;
+var drawing = [];
+var currentPath = [];
+
 var buttonPlayAnimation, buttonSaveFrame;
 var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
 var playerColours = [];
@@ -19,7 +24,6 @@ var playerColours = [];
 function assignColors(){
 	colorPitch = color('#469b2e');
 	colourSliderDot = color('#f89300')
-
 	colourRed = color('#d13131');
 	colourBlue = color('#223fc8');
 	colourGreen = color('#006c04');

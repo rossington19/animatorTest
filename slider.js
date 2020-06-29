@@ -7,6 +7,7 @@ class Slider{
 		this.dragged = false;
 		this.size = 20;
 		this.increment = 0.01;
+		this.frameIncrement = Array(maxNumOfKeyFrames).fill(1);
 	}
 
 	drawSlider(){
@@ -69,7 +70,8 @@ class Slider{
 	}
 
 	play(){
-		keyframe += this.increment;
+		let keyFrameInt = Math.floor(keyframe)
+		keyframe += (this.increment*this.frameIncrement[keyFrameInt]);
 		if (keyframe >= totalKeyFrame-1){
 			keyframe = 0;
 		}

@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="stylesheet" type="text/css" href="playerEditModal.css">
   <link rel="stylesheet" type="text/css" href="addActorModal.css">
+  <link rel="stylesheet" type="text/css" href="headerMenus.css">
   <script src="p5.min.js"></script>
   <script src="globalVars.js"></script>
   <script src="sketch.js"></script>
@@ -29,12 +30,32 @@
   <script src="player.js"></script>
   <script src="item.js"></script>
   <script src="modalFunctions.js"></script>
+
+  <div class="headerMenuContainer" id="drawingHeaderMenu">
+    <div class="toBeAffByCol" id="drawingPenColour" data-color="4" style="display: none;"></div>
+    <div class="headerMenuClose" onclick="closeHeaderMenu('drawingHeaderMenu'); drawingMode=false">&times;</div>
+    <div class="colorOptionsContainer headerColorOptions " id="colorOptionsItemEdit">
+      <div class="colorOption" data-color="0" onclick="changeColorSelection(this)"></div>
+      <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+      <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
+      <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
+      <div class="colorOption active" data-color="4" onclick="changeColorSelection(this)">✔</div>
+      <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+    </div>
+    <button id="drawUndoButton" onclick="drawingUndo()"> Undo </button>
+  </div>
+
+  <div class="headerMenuContainer" id="speedHeaderMenu">
+    <div class="headerMenuClose" onclick="closeHeaderMenu('speedHeaderMenu')">&times;</div>
+    <select id="speedTargetDropDown" onchange="setSpeedSlider()">
+      <option value="0">Global</option>
+    </select>
+    <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" oninput="updateGlobalSliderIncrement()">
+  </div>
+
 </head>
 
 <body>
-
-
-  
 
 <div id="canvasContainer">
   <div id="sideNavMenu" class="sidenav">
@@ -49,8 +70,8 @@
   <div id="headerButtonContainer">
     <button class="headerButton" onclick="openSideNavMenu()"> Menu </button>
     <button class="headerButton" onclick="showDomElement('addActorModal')"> Add </button>
-    <button class="headerButton"> Draw </button>
-    <button class="headerButton"> Speed </button>
+    <button class="headerButton" onclick="openHeaderMenu('drawingHeaderMenu'); drawingMode=true"> Draw </button>
+    <button class="headerButton" onclick="openHeaderMenu('speedHeaderMenu'); populateSpeedDropDown()"> Speed </button>
  </div>
 
 </div>
@@ -71,7 +92,7 @@
         <p>Edit colour:</p>
         <div class="colorOptionsContainer" id="colorOptionsPlayerEdit">
             <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
-            <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+            <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div
             <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
             <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
             <div class="colorOption" data-color="4" onclick="changeColorSelection(this)"></div>

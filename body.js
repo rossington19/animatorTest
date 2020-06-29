@@ -2,6 +2,7 @@ function drawBody(){
 	if (displayKeyframe != keyframe){
 		refreshKeyframe = true;
 	}
+	displayDrawing();
 	for(var i = 0; i < numOfPlayers; i++){
 		player[i].drawLines();
 	}
