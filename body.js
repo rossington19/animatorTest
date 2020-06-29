@@ -3,7 +3,7 @@ function drawBody(){
 		refreshKeyframe = true;
 	}
 	displayDrawing();
-	for(var i = 0; i < numOfPlayers; i++){
+	for(var i = 0; i < player.length; i++){
 		player[i].drawLines();
 	}
 	for(var i = 0; i < items.length; i++){
@@ -12,7 +12,7 @@ function drawBody(){
 			items[i].show();
 		}
 	}
-	for(var i = 0; i < numOfPlayers; i++){
+	for(var i = 0; i < player.length; i++){
 		player[i].update();
 		player[i].show();
 	}

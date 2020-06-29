@@ -22,7 +22,7 @@ function drawFooter(){
 }
 
 function saveLocations(){
-	for(var i = 0; i < numOfPlayers; i++){
+	for(var i = 0; i < player.length; i++){
 		player[i].save();
 	}
 	for(var i = 0; i < items.length; i++){

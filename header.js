@@ -19,15 +19,13 @@ function hideDomElement(elem){
 }
 
 function openSideNavMenu() {
-  document.getElementById("sideNavMenu").style.width = "150px";
+  document.getElementById("sideNavMenu").style.left = "0px";
   document.getElementById("sideNavMenuCover").style.display = "block";
 }
 
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeSideNavMenu() {
-  document.getElementById("sideNavMenu").style.width = "0";
+  document.getElementById("sideNavMenu").style.left = "-150px";
   document.getElementById("sideNavMenuCover").style.display = "none";
-  // document.getElementById("canvasContainer").style.marginLeft = "0"
 }
 
 function closeHeaderMenu(elmnt){
@@ -42,6 +40,7 @@ function updateGlobalSliderIncrement(){
 	let speedInput = document.getElementById('globalSpeedSlider');
 	let dropDown = document.getElementById('speedTargetDropDown');
 	let selectedFrame = parseInt(dropDown.options[dropDown.selectedIndex].value);
+
 	if(selectedFrame === 0){	//Global
 		let newInc = map(speedInput.value, 1, 100, 0.004, 0.025);
 		slider.increment = newInc;
@@ -52,6 +51,7 @@ function updateGlobalSliderIncrement(){
 
 function populateSpeedDropDown(){
 	let elmnt = document.getElementById("speedTargetDropDown");
+	showSliderSpeedLoc = 0
 	if (elmnt.options.length != totalKeyFrame){
 		elmnt.options.length = 0
 		var option = document.createElement("option");
@@ -72,6 +72,7 @@ function setSpeedSlider(){
 	let speedInput = document.getElementById('globalSpeedSlider');
 	let dropDown = document.getElementById('speedTargetDropDown');
 	let selectedFrame = parseInt(dropDown.options[dropDown.selectedIndex].value);
+	showSliderSpeedLoc = selectedFrame;
 	if(selectedFrame === 0){	//Global
 		speedInput.value = map(slider.increment, 0.004, 0.025, 1, 100);
 	} else {

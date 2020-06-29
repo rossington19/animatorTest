@@ -46,7 +46,7 @@
   </div>
 
   <div class="headerMenuContainer" id="speedHeaderMenu">
-    <div class="headerMenuClose" onclick="closeHeaderMenu('speedHeaderMenu')">&times;</div>
+    <div class="headerMenuClose" onclick="closeHeaderMenu('speedHeaderMenu'); showSliderSpeedLoc = undefined">&times;</div>
     <select id="speedTargetDropDown" onchange="setSpeedSlider()">
       <option value="0">Global</option>
     </select>
@@ -60,10 +60,10 @@
 <div id="canvasContainer">
   <div id="sideNavMenu" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeSideNavMenu()">&times;</a>
+    <a href="#">Pitch</a>
     <a href="#">Save</a>
     <a href="#">Load</a>
     <a href="#">Export</a>
-    <a href="#">Pitch</a>
   </div>
   <div id="sideNavMenuCover" class="modal" onclick="closeSideNavMenu()"></div>
 
@@ -114,7 +114,7 @@
 
         <div class="modalButtonContainer">
            <button class="modalButton" onclick="applyPlayerEdits()">Apply Changes</button>
-          <button class="modalButton">Delete Player</button>
+          <button class="modalButton" onclick="deletePlayer()">Delete Player</button>
         </div>
       </div>
 
@@ -141,7 +141,7 @@
         <div class="modalButtonContainer">
            <!-- TODO -->
            <button class="modalButton" onclick="applyItemEdits()">Apply Changes</button> 
-          <button class="modalButton">Delete Item</button>
+          <button class="modalButton" onclick="deleteItem()">Delete Item</button>
         </div>
       </div>
 
@@ -194,7 +194,7 @@
           <p>Select Item:</p>
           <div id="itemOptionsContainer">
             <div class="itemOption active" onclick="changeSelectedItem(this)" > 
-              <div class="itemImage  toBeAffByCol" id="itemToAdd" data-thisItemType="0" data-targItemType="1" data-color="5"> </div>
+              <div class="itemImage  toBeAffByCol" id="itemToAdd" data-thisItemType="0" data-targItemType="0" data-color="5"> </div>
               <p class="itemName"> Ball </p>
             </div>
             <div class="itemOption " onclick="changeSelectedItem(this)"> 

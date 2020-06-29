@@ -3,7 +3,7 @@ function setup() {
 	canvas = createCanvas(displayWidth, displayHeight - 150);
 	canvas.parent("canvasContainer");
 	assignColors();
-	for(var i = 0; i < numOfPlayers; i++){
+	for(var i = 0; i < 6; i++){
 		player.push(new Player(i));
 	}
 	items.push(new Item(0));
@@ -30,7 +30,7 @@ function draw() {
 function mousePressed() {
 	if(!drawingMode){
 		selected = undefined;
-		for(var i = numOfPlayers - 1; i >= 0; i--){
+		for(var i = player.length - 1; i >= 0; i--){
 			player[i].pressed();
 			if (selected != undefined){
 				break;	
@@ -65,7 +65,7 @@ function mouseClicked(){
 
 function mouseReleased() {
 	if(!drawingMode){
-		for(var i = numOfPlayers - 1; i >= 0; i--){
+		for(var i = player.length - 1; i >= 0; i--){
 			player[i].released();
 		}
 		for(var i = 0; i < items.length; i++){

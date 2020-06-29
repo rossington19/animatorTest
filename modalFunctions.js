@@ -67,12 +67,32 @@ function applyPlayerEdits(){
   hideDomElement('playerEditModal')
 }
 
+function deletePlayer(){
+   let domSelectedPlayer = document.getElementById('selectedPlayer');
+  selected = parseInt(domSelectedPlayer.getAttribute("data-target"));
+  player.splice(selected, 1);
+  for (var i = 0; i < player.length; i++) {
+    player[i].index = i;
+  }
+  hideDomElement('playerEditModal');
+}
+
 function applyItemEdits(){
-  let domSelectedPlayer = document.getElementById('selectedItem');
-  itemSelected = parseInt(domSelectedPlayer.getAttribute("data-target"));
+  let domSelectedItem = document.getElementById('selectedItem');
+  itemSelected = parseInt(domSelectedItem.getAttribute("data-target"));
   let selectedItemObj =  items.find(x => x.index === itemSelected);
-  selectedItemObj.col = parseInt(domSelectedPlayer.getAttribute("data-color"));
-  hideDomElement('itemEditModal')
+  selectedItemObj.col = parseInt(domSelectedItem.getAttribute("data-color"));
+  hideDomElement('itemEditModal');
+}
+
+function deleteItem(){
+  let domSelectedItem = document.getElementById('selectedItem');
+  itemSelected = parseInt(domSelectedItem.getAttribute("data-target"));
+  items.splice(itemSelected, 1);
+  for (var i = 0; i < items.length; i++) {
+    items[i].index = i;
+  }
+  hideDomElement('itemEditModal');
 }
 
 function populatePlayerEdit(){
@@ -105,17 +125,8 @@ function populateItemEdit(){
   document.getElementById("itemEditModal").style.display = "block";
   let selectedItem =  items.find(x => x.index === itemSelected);
   let domSelectedItem = document.getElementById('selectedItem');
-  // let domSelectedInput = document.getElementById('selectedPlayerInput');
-  
-  // let seletedPlayerNumber = selectedPlayer.displayNumber;
   let selectedItemColour = selectedItem.col;
-
-  // domSelectedPlayer.innerHTML = seletedPlayerNumber;
-  // domSelectedPlayer.backgroundColor = playerColours[selectedPlayerColour];
-  // domSelectedPlayer.setAttribute("data-color", selectedPlayerColour);
   domSelectedItem.setAttribute("data-target", itemSelected);
-  // domSelectedInput.value = seletedPlayerNumber;
-  // document.getElementById('showLines').checked = selectedPlayer.showLines
 
   let colorOptions = document.getElementById('colorOptionsItemEdit').children;
   let activeElem;
@@ -128,9 +139,8 @@ function populateItemEdit(){
 }
 
 function addNewPlayer(){
-  let newPlayerIndex = player[ player.length - 1].index + 1;
-  if(numOfPlayers < 30){
-    numOfPlayers++;
+  let newPlayerIndex = player.length;
+  if(player.length < 30){
     player.push( new Player(newPlayerIndex) )
   }
 
@@ -144,7 +154,7 @@ function addNewPlayer(){
 }
 
 function addNewItem(){
-  let newItemIndex = items[ items.length - 1].index + 1;
+  let newItemIndex = items.length;
   if(items.length < 5){
     items.push( new Item(newItemIndex) )
   }
@@ -163,6 +173,5 @@ function changeSelectedItem(elmnt){
   elmnt.className += " active";
    let itemToAdd = document.getElementById('itemToAdd');
    let typeOfItemToAdd = elmnt.children[0].getAttribute('data-thisItemType');
-   console.log(typeOfItemToAdd)
    itemToAdd.setAttribute("data-targItemType", typeOfItemToAdd);
 }

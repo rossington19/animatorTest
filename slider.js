@@ -19,6 +19,19 @@ class Slider{
 			let xLocation = this.margin + i*(this.lineLength/(totalKeyFrame-1)) 
 			line(xLocation, this.yLocation + (this.size/1.5) , xLocation, this.yLocation - (this.size/1.5)  )
 		}
+		if(showSliderSpeedLoc != undefined){
+			stroke(colourSliderDot);
+			strokeWeight(3);
+			if(showSliderSpeedLoc === 0){
+				line(this.margin, this.yLocation, width-this.margin, this.yLocation);
+			} else {
+				let dropDown = document.getElementById('speedTargetDropDown');
+				let selectedFrame = parseInt(dropDown.options[dropDown.selectedIndex].value);
+				let startLoc = this.margin + (selectedFrame-1)*(this.lineLength/(totalKeyFrame-1));
+				let endLoc = this.margin + (selectedFrame)*(this.lineLength/(totalKeyFrame-1));
+				line(startLoc, this.yLocation, endLoc, this.yLocation);
+			}
+		}
 		pop();
 	}
 

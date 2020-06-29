@@ -6,7 +6,7 @@ var totalKeyFrame = 5;
 var maxNumOfKeyFrames = 12;
 var playing = false;
 var player = [];
-var numOfPlayers = 6;
+// var numOfPlayers = 6;
 var items = [];
 var selected = undefined;
 var itemSelected = undefined;
@@ -16,6 +16,8 @@ var doubleClickTimer = 0;
 var drawingMode = false;
 var drawing = [];
 var currentPath = [];
+
+var showSliderSpeedLoc = undefined;
 
 var buttonPlayAnimation, buttonSaveFrame;
 var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
