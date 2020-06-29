@@ -52,12 +52,19 @@ function updateGlobalSliderIncrement(){
 
 function populateSpeedDropDown(){
 	let elmnt = document.getElementById("speedTargetDropDown");
-	for(var i = 0; i < totalKeyFrame - 1; i++){
+	if (elmnt.options.length != totalKeyFrame){
+		elmnt.options.length = 0
 		var option = document.createElement("option");
-	    option.value = i+1;
-	    option.text = "Frame " + (i+1);
-	    elmnt.appendChild(option);
-	}
+		option.value = 0;
+		option.text = "Global";
+		elmnt.appendChild(option);
+		for(var i = 0; i < totalKeyFrame - 1; i++){
+			option = document.createElement("option");
+		    option.value = i+1;
+		    option.text = "Frame " + (i+1);
+		    elmnt.appendChild(option);
+		}
+	}	
 	setSpeedSlider();
 }
 
@@ -70,7 +77,4 @@ function setSpeedSlider(){
 	} else {
 		speedInput.value = map(slider.frameIncrement[selectedFrame-1], 0.5, 1.5 , 1, 100)
 	}
-	// slider.frameIncrement[selectedFrame.value-1]
-	// speedInput.value = ;
-	// console.log(speedInput.value);
 }

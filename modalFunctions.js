@@ -93,7 +93,7 @@ function populatePlayerEdit(){
 
   let colorOptions = document.getElementById('colorOptionsPlayerEdit').children;
   let activeElem;
-  for (i = 0; i < colorOptions.length; i++) {
+  for (let i = 0; i < colorOptions.length; i++) {
     let colorNum = parseInt(colorOptions[i].getAttribute("data-color"));
     if(colorNum === selectedPlayerColour){
       changeColorSelection(colorOptions[i]);
