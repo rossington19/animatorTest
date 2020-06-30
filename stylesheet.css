@@ -1,5 +1,6 @@
 *{
   font-family: sans-serif;
+  user-select: none;
 }
 
 #headerButtonContainer{
@@ -15,10 +16,6 @@
   width: 60px;  /* Or whatever */
   margin: auto;  /* Magic! */
 }
-
-
-
-
 
 #addActorModal{
   display: none;
@@ -111,10 +108,9 @@
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;
-  top: 0;
-  right: 25px;
+  top: 0px;
+  left: -15px;
   font-size: 36px;
-  margin-left: 50px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -131,4 +127,23 @@
 
 #sideNavMenuCover{
   display: none;
+}
+
+
+
+/*Footer Buttons - Animation*/
+
+#animationButtonContainer{
+  position: absolute;
+  width: 100%;
+
+}
+
+#animationFlex{
+  display: flex;
+  justify-content: space-around;
+}
+
+.animationButton{
+  height: 25px;
 }

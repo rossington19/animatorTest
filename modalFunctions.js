@@ -1,10 +1,11 @@
 function changeTab(evt, tabName) {
   var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
+  let thisModalBod = evt.currentTarget.parentNode.parentNode;
+  tabcontent = thisModalBod.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  tablinks = document.getElementsByClassName("modalTabButton");
+  tablinks = thisModalBod.getElementsByClassName("modalTabButton");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
@@ -155,9 +156,7 @@ function addNewPlayer(){
 
 function addNewItem(){
   let newItemIndex = items.length;
-  if(items.length < 5){
-    items.push( new Item(newItemIndex) )
-  }
+  items.push( new Item(newItemIndex) );
   let newItem =  items.find(x => x.index === newItemIndex);
   let itemToAdd = document.getElementById('itemToAdd');
   newItem.col = parseInt(itemToAdd.getAttribute("data-color"));
@@ -174,4 +173,69 @@ function changeSelectedItem(elmnt){
    let itemToAdd = document.getElementById('itemToAdd');
    let typeOfItemToAdd = elmnt.children[0].getAttribute('data-thisItemType');
    itemToAdd.setAttribute("data-targItemType", typeOfItemToAdd);
+}
+
+
+// frame editing
+
+function populateAddFrameEditor(){
+  addBetweenFrameLoc = parseInt( document.getElementById('addingFrameSelText').getAttribute('data-frameNum') ); 
+  while (addBetweenFrameLoc >= totalKeyFrame){
+    updateAddingFrameSelector(false)
+  }
+}
+
+function populateDeleteFrameEditor(){
+  deleteFrameLoc = parseInt( document.getElementById('deletingFrameSelText').getAttribute('data-frameNum') ); 
+}
+
+
+function updateAddingFrameSelector(increase){
+  let selector = document.getElementById("addingFrameSelText");
+  let frameNum = parseInt(selector.getAttribute("data-frameNum"));
+  if(increase){
+    frameNum++;
+  } else {
+    frameNum--;
+  }
+  if(frameNum === 0){
+    selector.innerHTML = "At Start";
+    document.getElementById("addFrameSelDecr").disabled = true;
+  } else if (frameNum === totalKeyFrame){
+    selector.innerHTML = "At End";
+    document.getElementById("addFrameSelIncr").disabled = true;
+  } else {
+    let allButtons = selector.parentElement.getElementsByClassName("frameSelButton");
+    for (var i = allButtons.length - 1; i >= 0; i--) {
+      allButtons[i].disabled = false;
+    }
+    let nextFrame = frameNum+1;
+    selector.innerHTML = "Between " + frameNum + " and " + nextFrame;
+  }
+  addBetweenFrameLoc = frameNum;
+  selector.setAttribute("data-frameNum", frameNum)
+}
+
+function updateDeleteFrameSelector(increase){
+  let selector = document.getElementById("deletingFrameSelText");
+  let frameNum = parseInt(selector.getAttribute("data-frameNum"));
+  if(increase){
+    frameNum++;
+  } else {
+    frameNum--;
+  }
+  if(frameNum === 0){
+    document.getElementById("deleteFrameSelDecr").disabled = true;
+  } else if (frameNum === totalKeyFrame-1){
+    document.getElementById("deleteFrameSelIncr").disabled = true;
+  } else {
+    let allButtons = selector.parentElement.getElementsByClassName("frameSelButton");
+    for (var i = allButtons.length - 1; i >= 0; i--) {
+      allButtons[i].disabled = false;
+    }
+  }
+  let frameToShow = frameNum+1
+  selector.innerHTML = "Frame " + frameToShow;
+  deleteFrameLoc = frameNum;
+  selector.setAttribute("data-frameNum", frameNum)
 }

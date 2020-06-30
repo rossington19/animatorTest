@@ -34,7 +34,7 @@
   <div class="headerMenuContainer" id="drawingHeaderMenu">
     <div class="toBeAffByCol" id="drawingPenColour" data-color="4" style="display: none;"></div>
     <div class="headerMenuClose" onclick="closeHeaderMenu('drawingHeaderMenu'); drawingMode=false">&times;</div>
-    <div class="colorOptionsContainer headerColorOptions " id="colorOptionsItemEdit">
+    <div class="colorOptionsContainer headerColorOptions " id="colorOptionsDrawingEdit">
       <div class="colorOption" data-color="0" onclick="changeColorSelection(this)"></div>
       <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
       <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
@@ -223,6 +223,56 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div id="animationEditModal" class="modal" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined;">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined;">
+      &times;</span>
+      <p class="modalTitle">Animation Edit</p>  
+      <div class="modalBody">
+
+        <div class="modalTabContainer">
+          <button class="modalTabButton active" id="addFrameTab" onclick="changeTab(event,'addFrameContainer'); populateAddFrameEditor(); deleteFrameLoc = undefined">Add Frame</button>
+          <button class="modalTabButton" onclick="changeTab(event,'deleteFrameContainer'); addBetweenFrameLoc = undefined; populateDeleteFrameEditor();">Delete Frame</button>
+        </div>
+
+        <div id="addFrameContainer" class="tabcontent">
+          <p>Add a Frame:</p>
+          <div class="frameSelector" id="addingFrameSelector">
+            <button class="frameSelButton" id="addFrameSelDecr" onclick="updateAddingFrameSelector(false)" disabled=true> < </button>
+            <div class="frameSelText" id="addingFrameSelText" data-frameNum="0" >At Start</div>
+            <button class="frameSelButton" id="addFrameSelIncr" onclick="updateAddingFrameSelector(true)"> > </button>
+          </div>
+          <div class="modalButtonContainer">
+            <button class="modalButton" onclick="addFrame();">Add Frame</button>
+          </div> 
+        </div>
+        
+        <div id="deleteFrameContainer" class="tabcontent">
+          <p>Delete a Frame:</p>
+          
+            <div class="frameSelector" id="deleteFrameSelector">
+            <button class="frameSelButton" id="deleteFrameSelDecr" onclick="updateDeleteFrameSelector(false)" disabled=true> < </button>
+            <div class="frameSelText" id="deletingFrameSelText" data-frameNum="0" >Frame 1</div>
+            <button class="frameSelButton" id="deleteFrameSelIncr" onclick="updateDeleteFrameSelector(true)" > > </button>
+          </div>
+          <div class="modalButtonContainer">  
+             <button class="modalButton" onclick="deleteFrame();">Delete Frame</button> 
+          </div>
+        </div>  
+
+      </div>
+
+    </div>
+  </div>
+
+  <div id="animationButtonContainer">
+    <div id="animationFlex">
+      <button class="animationButton" id="editAnimationBut" onclick="showDomElement('animationEditModal'); document.getElementById('addFrameTab').click();">Edit Animation</button>
+      <button class="animationButton" id="playAnimationBut" onclick="playPause()">Play Animation</button>
+      <button class="animationButton" id="saveFrameBut" onclick="saveLocations()">Save Frame</button>
     </div>
   </div>
 

@@ -3,7 +3,7 @@ var keyframe = 0;
 var displayKeyframe = 0;
 var refreshKeyframe = false;
 var totalKeyFrame = 5;
-var maxNumOfKeyFrames = 12;
+
 var playing = false;
 var player = [];
 // var numOfPlayers = 6;
@@ -18,8 +18,10 @@ var drawing = [];
 var currentPath = [];
 
 var showSliderSpeedLoc = undefined;
+var addBetweenFrameLoc = undefined;
+var deleteFrameLoc = undefined;
 
-var buttonPlayAnimation, buttonSaveFrame;
+// var buttonPlayAnimation, buttonSaveFrame;
 var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
 var playerColours = [];
 

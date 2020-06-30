@@ -9,7 +9,7 @@ class Player {
     this.col = 2;
     this.showLines = false;
     this.key = new Array();
-    for(let i = 0; i < maxNumOfKeyFrames; i++){
+    for(let i = 0; i < totalKeyFrame; i++){
       this.key[i] = [this.x, this.y, false]
     }
   }
@@ -77,7 +77,7 @@ class Player {
   save(){
   	this.key[keyframe][0] = this.x
     this.key[keyframe][1] = this.y;
-    for(let i = keyframe+1; i < maxNumOfKeyFrames; i++){
+    for(let i = keyframe+1; i < totalKeyFrame; i++){
       if(this.key[i][2]){
         break;
       } else {
@@ -112,5 +112,16 @@ class Player {
 
   released() {
     this.dragging = false;
+  }
+
+  deleteFrame(frame){
+    this.key.splice(frame, 1);
+  }
+
+  addFrame(frame){
+    if(frame === 0){ frame++; }
+    var frameToAdd = this.key.slice(0);
+    var arrToAdd = frameToAdd[frame-1].slice(0);
+    this.key.splice(frame, 0, arrToAdd)
   }
 }

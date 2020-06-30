@@ -45,7 +45,7 @@ function updateGlobalSliderIncrement(){
 		let newInc = map(speedInput.value, 1, 100, 0.004, 0.025);
 		slider.increment = newInc;
 	} else {
-		slider.frameIncrement[selectedFrame-1]= map(speedInput.value, 1, 100, 0.5, 1.5)
+		slider.frameIncrement[selectedFrame-1]= map(speedInput.value, 1, 100, 0.2, 2)
 	}
 }
 
@@ -76,6 +76,6 @@ function setSpeedSlider(){
 	if(selectedFrame === 0){	//Global
 		speedInput.value = map(slider.increment, 0.004, 0.025, 1, 100);
 	} else {
-		speedInput.value = map(slider.frameIncrement[selectedFrame-1], 0.5, 1.5 , 1, 100)
+		speedInput.value = map(slider.frameIncrement[selectedFrame-1], 0.2, 2 , 1, 100)
 	}
 }

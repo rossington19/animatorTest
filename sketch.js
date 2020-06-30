@@ -21,10 +21,8 @@ function draw() {
 	drawFooter();
 	if(drawingMode){
 		drawOnCanvas();
-	}
-	
+	}	
 }
-
 
 
 function mousePressed() {
@@ -124,4 +122,40 @@ function drawingUndo(){
 	}
 }
 
+function addFrame(){
+	totalKeyFrame++;
+	for (var i = 0; i < player.length; i++) {
+		player[i].addFrame(addBetweenFrameLoc);
+	}
+	for (var i = 0; i < items.length; i++) {
+		items[i].addFrame(addBetweenFrameLoc);
+	}
+	slider.addFrame(addBetweenFrameLoc)
+	updateAddingFrameSelector(true);
+	populateAddFrameEditor();
+	hideDomElement('animationEditModal');
+	addBetweenFrameLoc = undefined; 
+	deleteFrameLoc = undefined;
+}
+
+function deleteFrame(){
+	if (totalKeyFrame > 2) {
+		totalKeyFrame--;
+		for (var i = 0; i < player.length; i++) {
+			player[i].deleteFrame(deleteFrameLoc)
+		}
+		for (var i = 0; i < items.length; i++) {
+			items[i].deleteFrame(deleteFrameLoc)
+		}
+		slider.deleteFrame(deleteFrameLoc)
+		if(deleteFrameLoc >= totalKeyFrame){
+			updateDeleteFrameSelector(false)
+		}
+		populateDeleteFrameEditor();
+		hideDomElement('animationEditModal');
+		addBetweenFrameLoc = undefined; 
+		deleteFrameLoc = undefined;
+	}
+
+}
 
