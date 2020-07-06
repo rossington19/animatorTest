@@ -2,7 +2,7 @@ var myDelay = (1/65)*1000;
 var startTime;
 var gif = new GIF({
 	workers: 15,
-	quality: 1000,
+	quality: 100,
 });
 
 
@@ -35,7 +35,8 @@ function startExportToGIF(){
 function captureGIF(){
 	let myCanvas = document.querySelector("canvas");
 	var ctx = myCanvas.getContext('2d');
-  	gif.addFrame(ctx.getImageData(0 , headerHeight, width, height - footerHeight - headerHeight), {copy: false, delay: myDelay});	
+  	gif.addFrame(ctx.getImageData(0 , (headerHeight*window.devicePixelRatio), (width*window.devicePixelRatio), (height - footerHeight - headerHeight)*window.devicePixelRatio, {copy: true, delay: myDelay}));	
+  	// gif.addFrame(myCanvas, {copy: true, delay: myDelay});	
 	if (animationLooped){
 		console.log("done")
 		playing = false;
