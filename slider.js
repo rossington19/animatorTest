@@ -80,10 +80,12 @@ class Slider{
 	}
 
 	play(){
-		let keyFrameInt = Math.floor(keyframe)
+		let keyFrameInt = Math.floor(keyframe);
+		animationLooped = false;
 		keyframe += (this.increment*this.frameIncrement[keyFrameInt]);
 		if (keyframe >= totalKeyFrame-1){
 			keyframe = 0;
+			animationLooped = true;
 		}
 	}
 

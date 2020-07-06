@@ -38,8 +38,7 @@ class Item {
   calcLocation(){
     let fixedKeyframe = Math.floor(keyframe)
     let percentage = keyframe - fixedKeyframe;
-
-    if( Array.isArray(this.key[fixedKeyframe])){
+    if( Array.isArray(this.key[fixedKeyframe])  && this.itemType != 1){
       if(fixedKeyframe < totalKeyFrame-1){
       	let startX = this.key[fixedKeyframe][0];
       	let startY = this.key[fixedKeyframe][1];
@@ -56,6 +55,12 @@ class Item {
   }
 
   show() {
+    if(this.dragging){
+      stroke(55)
+      strokeWeight(1)
+      line(0, this.y, width, this.y);
+      line(this.x, headerHeight, this.x, height);
+    }
     stroke(0);
     fill(playerColours[this.col]);
     if(this.itemType === 2){

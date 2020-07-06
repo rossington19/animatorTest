@@ -1,5 +1,5 @@
 function setupFooter(){
-	document.getElementById("animationButtonContainer").style.top = (height-35)+ "px"
+	document.getElementById("animationButtonContainer").style.top = (height-45)+ "px"
 	// buttonPlayAnimation = createButton("Edit Animaton");
 	// buttonPlayAnimation.position(10, height - 35);
 	// buttonPlayAnimation.mousePressed(playPause);
@@ -36,12 +36,17 @@ function saveLocations(){
 }
 
 function playPause(){
+	let buttonPlayAnimationText = document.getElementById("playAnimationText")
 	let buttonPlayAnimation = document.getElementById("playAnimationBut")
 	if(playing){
 		playing = false;
-		buttonPlayAnimation.innerHTML = "Play Animaton"
+		buttonPlayAnimationText.innerHTML = "Play Animation"
+		buttonPlayAnimation.classList.remove("fa-pause")
+		buttonPlayAnimation.classList.add("fa-play")
 	} else {
 		playing = true;
-		buttonPlayAnimation.innerHTML = "Pause Animaton"
+		buttonPlayAnimation.classList.remove("fa-play")
+		buttonPlayAnimation.classList.add("fa-pause")
+		buttonPlayAnimationText.innerHTML = "Pause Animation"
 	}
 }

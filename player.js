@@ -48,11 +48,15 @@ class Player {
   }
 
   show() {
+    if(this.dragging){
+      stroke(55)
+      strokeWeight(1)
+      line(0, this.y, width, this.y);
+      line(this.x, headerHeight, this.x, height)
+    }
     stroke(0);
-    fill(playerColours[this.col]); //TODO
-    
+    fill(playerColours[this.col]);
     circle(this.x, this.y, this.r)
-   
     noStroke();
     textAlign(CENTER, CENTER);
     textSize(23);

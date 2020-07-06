@@ -1,0 +1,56 @@
+.modalTabContainer{
+	width: 100%;
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.modalTabButton{
+	flex: 1;
+	height: 30px;
+	background: #eee;
+	border: none;
+	transition: 0.3s;
+}
+
+.modalTabButton.active {
+	background: #f89300;
+	/*border-bottom: 3px solid #555 ;*/
+}
+
+#addItemContainer {
+	display: none;
+}
+
+#itemOptionsContainer{
+	width: 100%;
+	display: flex;
+	flex-direction: row
+	justify-content: space-around;
+	padding-bottom: 30px; 
+	padding-top: 10px;
+}
+
+.itemOption{
+	margin: auto;
+	margin: 0 10px;
+	flex: 1;
+	text-align: center;
+	border: 2px solid transparent;
+	padding-bottom: 3px;
+}
+
+.itemOption.active {
+	border: 2px solid #f89300;
+	border-radius: 5px;
+}
+
+.itemImage{
+	height: 40px;
+	width: 20px;
+	margin: 5px auto;
+	background-color: #ebebeb;
+}
+
+.itemName{
+
+}

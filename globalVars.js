@@ -21,6 +21,9 @@ var showSliderSpeedLoc = undefined;
 var addBetweenFrameLoc = undefined;
 var deleteFrameLoc = undefined;
 
+var animationLooped = false;
+var capturingGIF = false;
+
 // var buttonPlayAnimation, buttonSaveFrame;
 var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
 var playerColours = [];

@@ -2,6 +2,7 @@
 function setup() {
 	canvas = createCanvas(displayWidth, displayHeight - 150);
 	canvas.parent("canvasContainer");
+	frameRate(65);
 	assignColors();
 	for(var i = 0; i < 6; i++){
 		player.push(new Player(i));
@@ -12,6 +13,7 @@ function setup() {
 	// setupBody();
 	setupFooter();
 	populateColorsOfOptions();
+
 }
 
 function draw() {
@@ -21,7 +23,10 @@ function draw() {
 	drawFooter();
 	if(drawingMode){
 		drawOnCanvas();
-	}	
+	}
+	if(capturingGIF){
+		captureGIF();
+	}
 }
 
 

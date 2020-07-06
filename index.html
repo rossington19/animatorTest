@@ -16,11 +16,13 @@
     }
 
   </style>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="stylesheet" type="text/css" href="playerEditModal.css">
-  <link rel="stylesheet" type="text/css" href="addActorModal.css">
-  <link rel="stylesheet" type="text/css" href="headerMenus.css">
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="css/playerEditModal.css">
+  <link rel="stylesheet" type="text/css" href="css/addActorModal.css">
+  <link rel="stylesheet" type="text/css" href="css/headerMenus.css">
+  <link rel="stylesheet" type="text/css" href="css/all.css">
   <script src="p5.min.js"></script>
+  <script src="gif.js"></script>
   <script src="globalVars.js"></script>
   <script src="sketch.js"></script>
   <script src="header.js"></script>
@@ -29,6 +31,7 @@
   <script src="slider.js"></script>
   <script src="player.js"></script>
   <script src="item.js"></script>
+  <script src="exportGIF.js"></script>
   <script src="modalFunctions.js"></script>
 
   <div class="headerMenuContainer" id="drawingHeaderMenu">
@@ -42,20 +45,26 @@
       <div class="colorOption active" data-color="4" onclick="changeColorSelection(this)">✔</div>
       <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
     </div>
-    <button id="drawUndoButton" onclick="drawingUndo()"> Undo </button>
+
+    <button id="drawUndoButton" class="headerButton fas fa-undo-alt" onclick="drawingUndo()"> </button>
   </div>
 
   <div class="headerMenuContainer" id="speedHeaderMenu">
     <div class="headerMenuClose" onclick="closeHeaderMenu('speedHeaderMenu'); showSliderSpeedLoc = undefined">&times;</div>
-    <select id="speedTargetDropDown" onchange="setSpeedSlider()">
-      <option value="0">Global</option>
-    </select>
-    <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" oninput="updateGlobalSliderIncrement()">
+    <div class="headerOption">
+      <select class="" id="speedTargetDropDown" onchange="setSpeedSlider()">
+        <option value="0">Global</option>
+      </select>
+    </div>
+    <div class="headerOption">
+      <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" oninput="updateGlobalSliderIncrement()">
+    </div>
   </div>
 
 </head>
 
 <body>
+ 
 
 <div id="canvasContainer">
   <div id="sideNavMenu" class="sidenav">
@@ -63,15 +72,24 @@
     <a href="#">Pitch</a>
     <a href="#">Save</a>
     <a href="#">Load</a>
-    <a href="#">Export</a>
+    <a onclick="startExportToGIF()">Export</a>
+    <a href="#">Exit</a>
   </div>
   <div id="sideNavMenuCover" class="modal" onclick="closeSideNavMenu()"></div>
 
   <div id="headerButtonContainer">
-    <button class="headerButton" onclick="openSideNavMenu()"> Menu </button>
-    <button class="headerButton" onclick="showDomElement('addActorModal')"> Add </button>
-    <button class="headerButton" onclick="openHeaderMenu('drawingHeaderMenu'); drawingMode=true"> Draw </button>
-    <button class="headerButton" onclick="openHeaderMenu('speedHeaderMenu'); populateSpeedDropDown()"> Speed </button>
+    <button class="headerButton" onclick="openSideNavMenu()"> 
+      <i class="fas fa-bars"></i> 
+    </button>
+    <button class="headerButton " onclick="showDomElement('addActorModal')">
+      <i class="fas fa-plus-circle"></i> 
+    </button>
+    <button class="headerButton" onclick="openHeaderMenu('drawingHeaderMenu'); drawingMode=true"> 
+      <i class="fas fa-pen"></i> 
+    </button>
+    <button class="headerButton" onclick="openHeaderMenu('speedHeaderMenu'); populateSpeedDropDown()">
+      <i class="far fa-clock"></i> 
+     </button>
  </div>
 
 </div>
@@ -226,7 +244,7 @@
     </div>
   </div>
 
-  <div id="animationEditModal" class="modal" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined;">
+  <div id="animationEditModal" class="modal" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined; ">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined;">
       &times;</span>
@@ -241,9 +259,13 @@
         <div id="addFrameContainer" class="tabcontent">
           <p>Add a Frame:</p>
           <div class="frameSelector" id="addingFrameSelector">
-            <button class="frameSelButton" id="addFrameSelDecr" onclick="updateAddingFrameSelector(false)" disabled=true> < </button>
+            <button class="frameSelButton " id="addFrameSelDecr" onclick="updateAddingFrameSelector(false)" disabled=true> 
+              <i class="fas fa-arrow-alt-circle-left"></i> 
+            </button>
             <div class="frameSelText" id="addingFrameSelText" data-frameNum="0" >At Start</div>
-            <button class="frameSelButton" id="addFrameSelIncr" onclick="updateAddingFrameSelector(true)"> > </button>
+            <button class="frameSelButton" id="addFrameSelIncr" onclick="updateAddingFrameSelector(true)">
+              <i class="fas fa-arrow-alt-circle-right"></i> 
+            </button>
           </div>
           <div class="modalButtonContainer">
             <button class="modalButton" onclick="addFrame();">Add Frame</button>
@@ -254,9 +276,9 @@
           <p>Delete a Frame:</p>
           
             <div class="frameSelector" id="deleteFrameSelector">
-            <button class="frameSelButton" id="deleteFrameSelDecr" onclick="updateDeleteFrameSelector(false)" disabled=true> < </button>
+            <button class="frameSelButton" id="deleteFrameSelDecr" onclick="updateDeleteFrameSelector(false)" disabled=true> <i class="fas fa-arrow-alt-circle-left"></i>  </button>
             <div class="frameSelText" id="deletingFrameSelText" data-frameNum="0" >Frame 1</div>
-            <button class="frameSelButton" id="deleteFrameSelIncr" onclick="updateDeleteFrameSelector(true)" > > </button>
+            <button class="frameSelButton" id="deleteFrameSelIncr" onclick="updateDeleteFrameSelector(true)" > <i class="fas fa-arrow-alt-circle-right"></i>  </button>
           </div>
           <div class="modalButtonContainer">  
              <button class="modalButton" onclick="deleteFrame();">Delete Frame</button> 
@@ -270,12 +292,21 @@
 
   <div id="animationButtonContainer">
     <div id="animationFlex">
-      <button class="animationButton" id="editAnimationBut" onclick="showDomElement('animationEditModal'); document.getElementById('addFrameTab').click();">Edit Animation</button>
-      <button class="animationButton" id="playAnimationBut" onclick="playPause()">Play Animation</button>
-      <button class="animationButton" id="saveFrameBut" onclick="saveLocations()">Save Frame</button>
+      <button class="animationButton fas fa-film" id="editAnimationBut" onclick="showDomElement('animationEditModal'); document.getElementById('addFrameTab').click();">
+        <div class="buttonUnderText"> Edit Frames </div>
+      </button>
+      <button class="animationButton fas fa-play" id="playAnimationBut" onclick="playPause()">
+        <div class="buttonUnderText" id="playAnimationText"> Play Animation </div>
+      </button>
+      <button class="animationButton far fa-save" id="saveFrameBut" onclick="saveLocations()">
+        <div class="buttonUnderText"> Save Frame </div>
+      </button>
     </div>
   </div>
 
+  <div id="exportedGIF" class="modal" onclick="hideDomElement('exportedGIF')">
+     <img src="">
+  </div>
 </footer>
 
 </html>
