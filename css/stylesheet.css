@@ -148,7 +148,7 @@
   width: 90px;
 }
 
-#globalSpeedSlider {
+.headerSlider {
   -webkit-appearance: none;
   width: 160px;
   height: 5px;
@@ -159,7 +159,7 @@
 }
 
 
-#globalSpeedSlider::-webkit-slider-thumb {
+.headerSlider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 25px;

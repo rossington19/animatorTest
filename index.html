@@ -31,6 +31,7 @@
   <script src="slider.js"></script>
   <script src="player.js"></script>
   <script src="item.js"></script>
+  <script src="pitch.js"></script>
   <script src="exportGIF.js"></script>
   <script src="modalFunctions.js"></script>
 
@@ -57,7 +58,17 @@
       </select>
     </div>
     <div class="headerOption">
-      <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" oninput="updateGlobalSliderIncrement()">
+      <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" class="headerSlider" oninput="updateGlobalSliderIncrement()">
+    </div>
+  </div>
+
+  <div class="headerMenuContainer" id="pitchHeaderMenu">
+    <div class="headerMenuClose" onclick="closeHeaderMenu('pitchHeaderMenu'); pitchMode = false">&times;</div>
+    <button class="headerButton" onclick="pitchLandscape = !pitchLandscape; console.log('Flipped')"> 
+      <i class="fas fa-sync-alt"></i>
+    </button>
+    <div class="headerOption">
+      <input type="range" min="1" max="50" value="10" class="headerSlider" id="pitchZoomSlider" oninput="pitchZoom()">
     </div>
   </div>
 
@@ -69,7 +80,7 @@
 <div id="canvasContainer">
   <div id="sideNavMenu" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeSideNavMenu()">&times;</a>
-    <a href="#">Pitch</a>
+    <a onclick="openHeaderMenu('pitchHeaderMenu'); closeSideNavMenu(); pitchMode = true">Pitch</a>
     <a href="#">Save</a>
     <a href="#">Load</a>
     <a onclick="startExportToGIF()">Export</a>

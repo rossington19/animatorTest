@@ -1,3 +1,7 @@
+function preload(){
+	pitchImg = loadImage('https://raw.githubusercontent.com/rossington19/animatorTest/master/PitchLARGE.png');
+}
+
 
 function setup() {
 	canvas = createCanvas(displayWidth, displayHeight - 150);
@@ -18,6 +22,7 @@ function setup() {
 
 function draw() {
 	background(colorPitch);
+	drawPitch();
 	drawHeader();
 	drawBody();
 	drawFooter();
@@ -31,7 +36,11 @@ function draw() {
 
 
 function mousePressed() {
-	if(!drawingMode){
+	if(drawingMode){
+		startPath();
+	} else if (pitchMode && clickInsidePitch()) {
+		pitchDragging();
+	} else {
 		selected = undefined;
 		for(var i = player.length - 1; i >= 0; i--){
 			player[i].pressed();
@@ -46,10 +55,14 @@ function mousePressed() {
 				break;	
 			}
 		}
-	} else {
-		startPath();
 	}
 	slider.pressed();
+}
+
+function mouseDragged(){
+	 if (pitchMode && clickInsidePitch()) {
+		pitchDragging();
+	}
 }
 
 function mouseClicked(){
@@ -76,6 +89,7 @@ function mouseReleased() {
 		}
 	}
 	slider.released();
+	pitchReleased();
 }
 
 function clickInsidePitch(){

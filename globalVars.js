@@ -24,6 +24,8 @@ var deleteFrameLoc = undefined;
 var animationLooped = false;
 var capturingGIF = false;
 
+var pitchMode = false;
+
 // var buttonPlayAnimation, buttonSaveFrame;
 var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
 var playerColours = [];
