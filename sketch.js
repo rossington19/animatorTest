@@ -6,6 +6,7 @@ function preload(){
 function setup() {
 	canvas = createCanvas(displayWidth, displayHeight - 150);
 	canvas.parent("canvasContainer");
+	canvas.id('drawingCanvas');
 	frameRate(240);
 	assignColors();
 	for(var i = 0; i < 6; i++){
@@ -29,8 +30,8 @@ function draw() {
 	if(drawingMode){
 		drawOnCanvas();
 	}
-	if(capturingGIF){
-		captureGIF();
+	if(recorder && recorder.state === "recording"){
+		recordCanvas();
 	}
 }
 

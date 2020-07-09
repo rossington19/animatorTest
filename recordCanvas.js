@@ -3,21 +3,26 @@ var name = 'testVid';
 var recorder;
 var stream;
 
-function recordCanvas() {
+var offscreenCanvas, offscreenCanvasContext, drawingCanvas, pixelDensity;
+
+function startRecordingCanvas() {
   closeSideNavMenu();
   keyframe = 0;
-  // capturingGIF = true;
+  pixelDensity = window.devicePixelRatio;
+
+  drawingCanvas = document.querySelector("#drawingCanvas");
+  
+  offscreenCanvas =document.createElement('canvas');
+  offscreenCanvas.width = drawingCanvas.width;
+  offscreenCanvas.height = drawingCanvas.height - pixelDensity*(headerHeight + footerHeight);
+  offscreenCanvasContext = offscreenCanvas.getContext('2d');
+
+  stream = offscreenCanvas.captureStream();
+
   // *** //
-  logs = []
   chunks = [];
-  frames = [];
   chunks.length = 0;
-  let canvasToRecord = document.querySelector("canvas");
-  stream = canvasToRecord.captureStream(65);
-  var options = {
-    videoBitsPerSecond : 1250000
-  }
-  recorder = new MediaRecorder(stream, options);
+  recorder = new MediaRecorder(stream);
   recorder.ondataavailable = e => {
     if (e.data.size) {
       chunks.push(e.data);
@@ -28,6 +33,12 @@ function recordCanvas() {
   setTimeout(function(){ playing = true; }, 500);
 
 }
+
+function recordCanvas(){
+  // drawImage(                     image,       sx,                sy,              sWidth,                 sHeight,        dx, dy,      dWidth,                dHeight);
+  offscreenCanvasContext.drawImage(drawingCanvas, 0,  pixelDensity*headerHeight, drawingCanvas.width, offscreenCanvas.height, 0, 0, drawingCanvas.width, offscreenCanvas.height  )
+}
+
 
 function onRecorderStop(e) {
   var blobWebm = new Blob(chunks,  {type: 'video/mp4'});

@@ -41,7 +41,7 @@ class Slider{
 		circle(this.dotXLoc, this.yLocation, this.size);
 		keyframe = this.convertLocToFrame();
 		pop();
-		if (!playing){
+		if (!playing && !this.dragged){
 			keyframe = Math.round(keyframe);
 		}
 	}
