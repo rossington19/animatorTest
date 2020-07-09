@@ -2,11 +2,11 @@ class Player {
 	constructor(num) {
     this.dragging = false;
     this.index = num;
-    this.displayNumber = num+1;
+    this.displayNumber = num+10;
     this.x = 20 + num * 30;
     this.y = 100;
     this.r = 30;
-    this.col = 2;
+    this.col = 0;
     this.showLines = false;
     this.key = new Array();
     for(let i = 0; i < totalKeyFrame; i++){
@@ -64,7 +64,7 @@ class Player {
     if(this.col === 3 || this.col === 5){
       fill(0)
     }
-  	text(this.displayNumber, this.x, this.y+1);
+  	text(this.displayNumber, this.x-1, this.y+1);
   }
 
   drawLines(){

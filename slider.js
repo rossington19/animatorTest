@@ -41,6 +41,9 @@ class Slider{
 		circle(this.dotXLoc, this.yLocation, this.size);
 		keyframe = this.convertLocToFrame();
 		pop();
+		if (!playing){
+			keyframe = Math.round(keyframe);
+		}
 	}
 
 	getDotLoc(){
@@ -84,8 +87,18 @@ class Slider{
 		animationLooped = false;
 		keyframe += (this.increment*this.frameIncrement[keyFrameInt]);
 		if (keyframe >= totalKeyFrame-1){
-			keyframe = 0;
-			animationLooped = true;
+			if(recorder && recorder.state === "recording"){
+				keyframe = totalKeyFrame-1;
+				setTimeout(function(){ 
+					if(recorder && recorder.state === "recording"){
+						recorder.stop(); 
+						playing = false;
+					}
+				}, 250);
+				setTimeout(function(){ keyframe = 0; }, 500);
+			} else {
+				keyframe = 0;
+			}
 		}
 	}
 

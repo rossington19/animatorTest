@@ -6,7 +6,7 @@ function preload(){
 function setup() {
 	canvas = createCanvas(displayWidth, displayHeight - 150);
 	canvas.parent("canvasContainer");
-	frameRate(65);
+	frameRate(240);
 	assignColors();
 	for(var i = 0; i < 6; i++){
 		player.push(new Player(i));

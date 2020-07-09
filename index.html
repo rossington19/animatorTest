@@ -22,7 +22,6 @@
   <link rel="stylesheet" type="text/css" href="css/headerMenus.css">
   <link rel="stylesheet" type="text/css" href="css/all.css">
   <script src="p5.min.js"></script>
-  <script src="gif.js"></script>
   <script src="globalVars.js"></script>
   <script src="sketch.js"></script>
   <script src="header.js"></script>
@@ -32,8 +31,9 @@
   <script src="player.js"></script>
   <script src="item.js"></script>
   <script src="pitch.js"></script>
-  <script src="exportGIF.js"></script>
   <script src="modalFunctions.js"></script>
+  <script src="download.js"></script> 
+
 
   <div class="headerMenuContainer" id="drawingHeaderMenu">
     <div class="toBeAffByCol" id="drawingPenColour" data-color="4" style="display: none;"></div>
@@ -68,7 +68,7 @@
       <i class="fas fa-sync-alt"></i>
     </button>
     <div class="headerOption">
-      <input type="range" min="1" max="50" value="10" class="headerSlider" id="pitchZoomSlider" oninput="pitchZoom()">
+      <input type="range" min="1" max="100" value="25" class="headerSlider" id="pitchZoomSlider" oninput="pitchZoom()">
     </div>
   </div>
 
@@ -83,7 +83,7 @@
     <a onclick="openHeaderMenu('pitchHeaderMenu'); closeSideNavMenu(); pitchMode = true">Pitch</a>
     <a href="#">Save</a>
     <a href="#">Load</a>
-    <a onclick="startExportToGIF()">Export</a>
+    <a onclick="recordCanvas()">Export</a>
     <a href="#">Exit</a>
   </div>
   <div id="sideNavMenuCover" class="modal" onclick="closeSideNavMenu()"></div>
@@ -320,6 +320,8 @@
      <img src="" style="max-width: 90%; ">
    </div>
   </div>
+
+  <script src="recordCanvas.js"></script>
 </footer>
 
 </html>

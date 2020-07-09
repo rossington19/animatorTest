@@ -2,7 +2,7 @@ var slider;
 var keyframe = 0;
 var displayKeyframe = 0;
 var refreshKeyframe = false;
-var totalKeyFrame = 5;
+var totalKeyFrame = 6;
 
 var playing = false;
 var player = [];
