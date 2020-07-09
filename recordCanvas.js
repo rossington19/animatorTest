@@ -12,7 +12,7 @@ function startRecordingCanvas() {
 
   drawingCanvas = document.querySelector("#drawingCanvas");
   drawingCanvas.style.position = 'absolute'
-  drawingCanvas.style.left = '300px'
+  drawingCanvas.style.left = '100px'
   
   offscreenCanvas =document.createElement('canvas');
   offscreenCanvas.width = drawingCanvas.width;
