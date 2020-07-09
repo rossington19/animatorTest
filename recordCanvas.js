@@ -11,7 +11,8 @@ function startRecordingCanvas() {
   pixelDensity = window.devicePixelRatio;
 
   drawingCanvas = document.querySelector("#drawingCanvas");
-  drawingCanvas.style.display = 'none'
+  drawingCanvas.style.position = 'absolute'
+  drawingCanvas.style.left = '300px'
   
   offscreenCanvas =document.createElement('canvas');
   offscreenCanvas.width = drawingCanvas.width;
