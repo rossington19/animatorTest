@@ -11,13 +11,20 @@ function startRecordingCanvas() {
   pixelDensity = window.devicePixelRatio;
 
   drawingCanvas = document.querySelector("#drawingCanvas");
-  drawingCanvas.style.position = 'absolute'
-  drawingCanvas.style.right = '250px'
+  testy = document.querySelector("#testy");
+  testy.style.visibility = 'visible';
+
+  // drawingCanvas.style.position = 'absolute'
+  // drawingCanvas.style.left = '100px'
+  // canvasContainer = document.querySelector("#canvasContainer");
+
   
-  offscreenCanvas =document.createElement('canvas');
+  offscreenCanvas = document.createElement('canvas');
   offscreenCanvas.width = drawingCanvas.width;
   offscreenCanvas.height = drawingCanvas.height - pixelDensity*(headerHeight + footerHeight);
   offscreenCanvasContext = offscreenCanvas.getContext('2d');
+
+
 
   stream = offscreenCanvas.captureStream();
 
@@ -39,6 +46,7 @@ function startRecordingCanvas() {
 function recordCanvas(){
   // drawImage(                     image,       sx,                sy,              sWidth,                 sHeight,        dx, dy,      dWidth,                dHeight);
   offscreenCanvasContext.drawImage(drawingCanvas, 0,  pixelDensity*headerHeight, drawingCanvas.width, offscreenCanvas.height, 0, 0, drawingCanvas.width, offscreenCanvas.height  )
+  // offscreenCanvasContext.drawImage(drawingCanvas, 0, 0 )
 }
 
 
