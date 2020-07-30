@@ -33,83 +33,21 @@
   <script src="pitch.js"></script>
   <script src="modalFunctions.js"></script>
   <script src="download.js"></script> 
-
-
-  <div class="headerMenuContainer" id="drawingHeaderMenu">
-    <div class="toBeAffByCol" id="drawingPenColour" data-color="4" style="display: none;"></div>
-    <div class="headerMenuClose" onclick="closeHeaderMenu('drawingHeaderMenu'); drawingMode=false">&times;</div>
-    <div class="colorOptionsContainer headerColorOptions " id="colorOptionsDrawingEdit">
-      <div class="colorOption" data-color="0" onclick="changeColorSelection(this)"></div>
-      <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
-      <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
-      <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
-      <div class="colorOption active" data-color="4" onclick="changeColorSelection(this)">✔</div>
-      <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
-    </div>
-
-    <button id="drawUndoButton" class="headerButton fas fa-undo-alt" onclick="drawingUndo()"> </button>
-  </div>
-
-  <div class="headerMenuContainer" id="speedHeaderMenu">
-    <div class="headerMenuClose" onclick="closeHeaderMenu('speedHeaderMenu'); showSliderSpeedLoc = undefined">&times;</div>
-    <div class="headerOption">
-      <select class="" id="speedTargetDropDown" onchange="setSpeedSlider()">
-        <option value="0">Global</option>
-      </select>
-    </div>
-    <div class="headerOption">
-      <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" class="headerSlider" oninput="updateGlobalSliderIncrement()">
-    </div>
-  </div>
-
-  <div class="headerMenuContainer" id="pitchHeaderMenu">
-    <div class="headerMenuClose" onclick="closeHeaderMenu('pitchHeaderMenu'); pitchMode = false">&times;</div>
-    <button class="headerButton" onclick="pitchLandscape = !pitchLandscape; console.log('Flipped')"> 
-      <i class="fas fa-sync-alt"></i>
-    </button>
-    <div class="headerOption">
-      <input type="range" min="1" max="100" value="25" class="headerSlider" id="pitchZoomSlider" oninput="pitchZoom()">
-    </div>
-  </div>
+  <script src="fileHandling.js"></script> 
 
 </head>
 
 <body>
- 
-
-<div id="canvasContainer">
-  <div id="sideNavMenu" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeSideNavMenu()">&times;</a>
-    <a onclick="openHeaderMenu('pitchHeaderMenu'); closeSideNavMenu(); pitchMode = true">Pitch</a>
-    <a href="#">Save</a>
-    <a href="#">Load</a>
-    <a onclick="startRecordingCanvas()">Export</a>
-    <a href="#">Exit</a>
+<div id="animatorContainer">
+  
+  <div id="fileDraggedOver" class="modal" onmousedown="event.stopPropagation()">
+    <div id="addFileCont">
+      <i id="fileAddIcon" class="fas fa-plus-circle"></i>
+      <p id="fileAddText"> Drop To Load The File</p>
+    </div>
   </div>
-  <div id="sideNavMenuCover" class="modal" onclick="closeSideNavMenu()"></div>
 
-  <div id="headerButtonContainer">
-    <button class="headerButton" onclick="openSideNavMenu()"> 
-      <i class="fas fa-bars"></i> 
-    </button>
-    <button class="headerButton " onclick="showDomElement('addActorModal')">
-      <i class="fas fa-plus-circle"></i> 
-    </button>
-    <button class="headerButton" onclick="openHeaderMenu('drawingHeaderMenu'); drawingMode=true"> 
-      <i class="fas fa-pen"></i> 
-    </button>
-    <button class="headerButton" onclick="openHeaderMenu('speedHeaderMenu'); populateSpeedDropDown()">
-      <i class="far fa-clock"></i> 
-     </button>
- </div>
-
-</div>
-
-
-</body>
-
-<footer>
-  <div id="playerEditModal" class="modal" onclick="hideDomElement('playerEditModal')">
+  <div id="playerEditModal" class="modal" onmousedown="event.stopPropagation()" onclick="hideDomElement('playerEditModal')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close" onclick="hideDomElement('playerEditModal')">
       &times;</span>
@@ -149,14 +87,14 @@
     </div>
   </div>
 
-  <div id="itemEditModal" class="modal" onclick="hideDomElement('itemEditModal')">
+  <div id="itemEditModal" class="modal" onmousedown="event.stopPropagation()" onclick="hideDomElement('itemEditModal')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close" onclick="hideDomElement('itemEditModal')">
       &times;</span>
       <p class="modalTitle">Item Edit</p>  
       <div class="modalBody">
 
-        <div class="showPlayer toBeAffByCol" id="selectedItem"></div>
+        <div class="itemImage toBeAffByCol" id="selectedItem"></div>
         <p>Edit colour:</p>
         <div class="colorOptionsContainer" id="colorOptionsItemEdit">
             <div class="colorOption active" data-color="0" onclick="changeColorSelection(this)">✔</div>
@@ -167,7 +105,6 @@
             <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
           </div>
         <div class="modalButtonContainer">
-           <!-- TODO -->
            <button class="modalButton" onclick="applyItemEdits()">Apply Changes</button> 
           <button class="modalButton" onclick="deleteItem()">Delete Item</button>
         </div>
@@ -176,7 +113,7 @@
     </div>
   </div>
 
-  <div id="addActorModal" class="modal" onclick="hideDomElement('addActorModal')">
+  <div id="addActorModal" class="modal" onmousedown="event.stopPropagation()" onclick="hideDomElement('addActorModal')">
     <div class="modal-content"  onclick="event.stopPropagation()" >
       <span class="close" onclick="hideDomElement('addActorModal')">
       &times;</span>
@@ -222,15 +159,15 @@
           <p>Select Item:</p>
           <div id="itemOptionsContainer">
             <div class="itemOption active" onclick="changeSelectedItem(this)" > 
-              <div class="itemImage  toBeAffByCol" id="itemToAdd" data-thisItemType="0" data-targItemType="0" data-color="5"> </div>
+              <div class="itemImage  toBeAffByCol itemBall" id="itemToAdd" data-thisItemType="0" data-targItemType="0" data-color="5"> </div>
               <p class="itemName"> Ball </p>
             </div>
             <div class="itemOption " onclick="changeSelectedItem(this)"> 
-              <div class="itemImage  toBeAffByCol" data-thisItemType="1" id="coneItem">  </div>
+              <div class="itemImage  toBeAffByCol itemCone" data-thisItemType="1" id="coneItem"> <div class="coneInner"></div> </div>
               <p class="itemName"> Cone </p>
             </div>
             <div class="itemOption " onclick="changeSelectedItem(this)"> 
-              <div class="itemImage  toBeAffByCol" data-thisItemType="2" id="padItem">  </div>
+              <div class="itemImage  toBeAffByCol itemPad" data-thisItemType="2" id="padItem">  </div>
               <p class="itemName"> Pad </p>
             </div>
           </div>
@@ -254,7 +191,7 @@
     </div>
   </div>
 
-  <div id="animationEditModal" class="modal" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined; ">
+  <div id="animationEditModal" class="modal" onmousedown="event.stopPropagation()" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined; ">
     <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close" onclick="hideDomElement('animationEditModal'); addBetweenFrameLoc = undefined; deleteFrameLoc = undefined;">
       &times;</span>
@@ -299,30 +236,145 @@
 
     </div>
   </div>
+  <div id="sideNavMenuCover" class="modal" onmousedown="event.stopPropagation()" onclick="closeSideNavMenu()"></div>
 
-  <div id="animationButtonContainer">
-    <div id="animationFlex">
-      <button class="animationButton fas fa-film" id="editAnimationBut" onclick="showDomElement('animationEditModal'); document.getElementById('addFrameTab').click();">
-        <div class="buttonUnderText"> Edit Frames </div>
+
+  <div id="exportedGIF" class="modal" onmousedown="event.stopPropagation()" >
+    <div id="exportedGIFContent" class="modal-content" onclick="event.stopPropagation()">
+      <div id="exportProcessText">Capturing Animation...</div>
+      <div id="exportProcessPercentage">0%</div>
+      <div class="modalButtonContainer">
+         <button class="modalButton" onclick="quitRender();">Exit</button>
+      </div>
+  </div>
+
+  </div>
+
+  <div class="headerControlContainer">
+    <div class="headerMenuContainer" id="drawingHeaderMenu">
+      <div class="toBeAffByCol" id="drawingPenColour" data-color="4" style="display: none;"></div>
+      <div class="headerMenuClose genButton" onclick="closeHeaderMenu('drawingHeaderMenu'); drawingMode=false">&times;</div>
+      <div class="colorOptionsContainer headerColorOptions " id="colorOptionsDrawingEdit">
+        <div class="colorOption" data-color="0" onclick="changeColorSelection(this)"></div>
+        <div class="colorOption" data-color="1" onclick="changeColorSelection(this)"></div>
+        <div class="colorOption" data-color="2" onclick="changeColorSelection(this)"></div>
+        <div class="colorOption blackTick" data-color="3" onclick="changeColorSelection(this)"></div>
+        <div class="colorOption active" data-color="4" onclick="changeColorSelection(this)">✔</div>
+        <div class="colorOption blackTick" data-color="5" onclick="changeColorSelection(this)"></div>
+      </div>
+      <div class="vertSep"> </div>  
+      <button class="headerButton genButton drawingHeaderButton active" onclick="drawingType = 0; changeActiveDrawingTool(this)"> 
+        <i class="fas fa-pencil-alt"></i> 
+        <div class="buttonUnderText genButton" style="margin-top: 0px;">Sketch</div>
       </button>
-      <button class="animationButton fas fa-play" id="playAnimationBut" onclick="playPause()">
-        <div class="buttonUnderText" id="playAnimationText"> Play Animation </div>
+      <button class="headerButton genButton drawingHeaderButton" onclick="drawingType = 1; changeActiveDrawingTool(this)"> 
+        <i class="fas fa-ruler"></i>
+        <div class="buttonUnderText genButton" style="margin-top: 0px;">Line</div>
       </button>
-      <button class="animationButton far fa-save" id="saveFrameBut" onclick="saveLocations()">
-        <div class="buttonUnderText"> Save Frame </div>
+      <button class="headerButton genButton drawingHeaderButton" onclick="drawingType = 2; changeActiveDrawingTool(this)"> 
+        <i class="fas fa-long-arrow-alt-right"></i> 
+        <div class="buttonUnderText genButton" style="margin-top: 0px;">Arrow</div>
+      </button>
+       <button class="headerButton genButton drawingHeaderButton" onclick="drawingType = 3; changeActiveDrawingTool(this)"> 
+        <i class="far fa-square"></i> 
+        <div class="buttonUnderText genButton" style="margin-top: 0px;">Box</div>
+      </button>   
+      <div class="vertSep"> </div>  
+      <button id="drawUndoButton" class="headerButton genButton" onclick="drawingUndo()">
+      <i class="fas fa-undo-alt"></i> 
+        <div class="buttonUnderText genButton" style="margin-top: 0px;">Undo</div>
       </button>
     </div>
-  </div>
 
-  <div id="exportedGIF" class="modal" onclick="hideDomElement('exportedGIF')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-     <img src="" style="max-width: 90%; ">
+    <div class="headerMenuContainer" id="speedHeaderMenu">
+      <div class="headerMenuClose genButton" onclick="closeHeaderMenu('speedHeaderMenu'); showSliderSpeedLoc = undefined">&times;</div>
+      <div class="headerOption">
+        <select class="" id="speedTargetDropDown" onchange="setSpeedSlider()">
+          <option value="0">Global</option>
+        </select>
+      </div>
+      <p id="speedText" class="headerPara"> Speed: </p>
+      <div class="headerOption">
+        <input type="range" min="1" max="100" value="30" id="globalSpeedSlider" class="headerSlider" oninput="updateGlobalSliderIncrement()">
+      </div>
+    </div>
+
+    <div class="headerMenuContainer" id="pitchHeaderMenu">
+      <div class="headerMenuClose genButton" onclick="closeHeaderMenu('pitchHeaderMenu'); pitchMode = false">&times;</div>
+      <p class="headerPara" id="pitchText"> Pitch: </p>
+      <button class="headerButton genButton" onclick="pitchLandscape = !pitchLandscape; console.log('Flipped')"> 
+        <i class="fas fa-sync-alt"></i>
+        <div class="buttonUnderText" style="margin-top: 0px;">Rotate</div>
+      </button>
+      <p class="headerPara" id="zoomText"> Zoom: </p>
+      <div class="headerOption">
+        <input type="range" min="1" max="100" value="25" class="headerSlider" id="pitchZoomSlider" oninput="pitchZoom()">
+      </div>
+    </div>
+    
+    <div id="headerButtonContainer">
+        <button class="headerButton genButton" onclick="openSideNavMenu()"> 
+          <i class="fas fa-bars"></i> 
+          <div class="buttonUnderText" style="margin-top: 0px;">Menu</div>
+        </button>
+        <button class="headerButton genButton" onclick="showDomElement('addActorModal')">
+          <i class="fas fa-plus-circle"></i>
+          <div class="buttonUnderText" style="margin-top: 0px;">Add Actors</div> 
+        </button>
+        <button class="headerButton genButton" onclick="openHeaderMenu('drawingHeaderMenu'); drawingMode=true"> 
+          <i class="fas fa-pen"></i> 
+          <div class="buttonUnderText genButton" style="margin-top: 0px;">Draw</div>
+        </button>
+        <button class="headerButton genButton" onclick="openHeaderMenu('speedHeaderMenu'); populateSpeedDropDown()">
+          <i class="far fa-clock"></i> 
+          <div class="buttonUnderText" style="margin-top: 0px;">Speed</div>
+         </button>
+     </div>
    </div>
+   
+  
+
+  <div id="canvasContainer">
+    
+    
+
   </div>
 
-<div id="testy" style="height: 100%; width: 100%; z-index: 100; position: fixed; left: 0; top: 0; background: #555; visibility: hidden">
-  testy
+  <div id="animationButtonContainer">
+      <div id="animationFlex">
+        <button class="animationButton genButton" id="editAnimationBut" onclick="closeHeaderMenu('pitchHeaderMenu'); closeHeaderMenu('drawingHeaderMenu'); closeHeaderMenu('speedHeaderMenu'); showSliderSpeedLoc = undefined; showDomElement('animationEditModal'); document.getElementById('addFrameTab').click(); drawingMode=false;">
+          <i class="fas fa-film"></i>
+          <div class="buttonUnderText"> Edit Frames </div>
+        </button>
+        <button class="animationButton  genButton"  id="playPauseAnimationBut"  onclick="playPause(); document.getElementById('playPauseAnimationBut').blur()" tabindex="-1">
+          <i class="fas fa-play" id="playAnimationBut"></i>
+          <div class="buttonUnderText" id="playAnimationText"> Play Animation </div>
+        </button>
+        <button class="animationButton genButton" id="saveFrameBut" onclick="saveLocations()">
+          <i class="far fa-save"></i>
+          <div class="buttonUnderText"> Save Frame </div>
+        </button>
+      </div>
+    </div>
+
+  <div id="sideNavMenu" class="sidenav" onmousedown="event.stopPropagation()">
+    <a href="javascript:void(0)" class="closebtn genButton" onclick="closeSideNavMenu()">&times;</a>
+    <a class="genButton" onclick="openHeaderMenu('pitchHeaderMenu'); closeSideNavMenu(); pitchMode = true">Pitch</a>
+    <a class="genButton" onclick="saveFile()">Save</a>
+    <a class="genButton" onclick="document.getElementById('fileInput').click();">Load</a>
+    <a class="genButton" onclick="startRecordingCanvas(); closeSideNavMenu();">Export</a>
+  </div>
+  
+
+  
+
+  
+
 </div>
+
+</body>
+
+<footer>
 
   <script src="recordCanvas.js"></script>
 </footer>

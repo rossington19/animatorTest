@@ -14,8 +14,10 @@ var doubleClickTimer = 0;
 
 // Drawing shit
 var drawingMode = false;
+var drawingType = 0; // 0 free, line, arrow, 4 box
 var drawing = [];
 var currentPath = [];
+var lines = []; //type, x1, y1, x2, y2
 
 var showSliderSpeedLoc = undefined;
 var addBetweenFrameLoc = undefined;
@@ -42,5 +44,7 @@ function assignColors(){
 	playerColours = [colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite];
 }
 
-var headerHeight = 40;
-var footerHeight = 90;
+var headerHeight = 0;
+var footerHeight = 50;
+
+var jsonFile;

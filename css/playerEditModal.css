@@ -29,6 +29,11 @@
 	padding-top: 10px;
 }
 
+#colorOptionsDrawingEdit{
+	padding-top: 10px;
+	width: 400px;
+}
+
 .colorOption{
 	margin: auto;
 	width: 30px;
@@ -40,6 +45,10 @@
 	font-size: 1.25em;
 	font-weight: bolder;
 	background: grey;
+}
+
+.colorOption:hover{
+	box-shadow: 0px 0px 10px #AAA;
 }
 
 .blackTick{
@@ -70,6 +79,7 @@
 	float: right;
 	margin-right: 20px;
 	text-align: center;
+	font-size: 18px;
 	/*border: none;*/
 	/*border-bottom: 1px solid #666*/
 }
@@ -87,10 +97,19 @@
 	width: 175px;
 	margin-bottom: 20px;
 	border-radius: 10px;
+	font-size: 20px;
 	border: 2px solid #f89300;
 	background: #eee;
 	font-size: 15px;
 	height: 50px;
+}
+
+.modalButton:hover{
+	background: #DDD;
+}
+
+.modalButton:active{
+	background: #f89300;
 }
 
 /* SLIDER */
@@ -118,7 +137,11 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: transform .4s, background-color 0.1s;
+}
+
+.slider:hover{
+	background: #AAA;
 }
 
 .slider:before {
@@ -129,11 +152,15 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: transform .4s, background-color 0.1s;
 }
 
 input:checked + .slider {
   background-color: #f89300;
+}
+
+input:checked + .slider:hover {
+  background-color: #ffa829;
 }
 
 input:checked + .slider:before {
@@ -179,11 +206,18 @@ input:checked + .slider:before {
 	background: none;
 	border: none;
 	color: #888;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.frameSelButton:hover{
+	color: #f89300;
+	transition: 0.1s;
 }
 
 .frameSelButton:disabled{
 	color: #EEE;
 }
+
 
 .frameSelText{
 	height: 40px;

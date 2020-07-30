@@ -29,7 +29,7 @@ function closeSideNavMenu() {
 }
 
 function closeHeaderMenu(elmnt){
-	document.getElementById(elmnt).style.top = "-40px";
+	document.getElementById(elmnt).style.top = "-55px";
 }
 
 function openHeaderMenu(elmnt){

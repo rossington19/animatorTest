@@ -1,28 +1,33 @@
 
-
 #headerButtonContainer{
-  position: fixed;
-  padding: 5px 0;
-  width: 100%;
+  height: 55px;
   display: flex;
   flex-direction: row
   justify-content: space-around;
+  background-color: #ebebeb;
 }
 
 .headerButton{
-  width: 100px;  /* Or whatever */
-  margin: auto;  /* Magic! */
+  width: 100px;
+  margin: auto;
   background: none;
   border: none;
   font-size: 27px;
 }
 
+.headerControlContainer{
+	width: inherit;
+	height: 55px;
+	position: relative;
+	overflow: hidden;
+}
+
 .headerMenuContainer{
-	width: 100%;
-	height: 40px;
-	top: -40px;
+	height: 55px;
+	width: inherit;
 	z-index: 1;
-	position: fixed; /* Stay in place */
+	position: absolute;
+	top: -55px;
 	background-color: #ebebeb;
 	display: flex;
 	justify-content: space-between;
@@ -32,7 +37,7 @@
 
 .headerMenuClose{
 	width: 45px;
-	line-height: 40px;
+	line-height: 55px;
 	font-size: 3em;
 	padding-left: 3px;
 }
@@ -49,13 +54,36 @@
 
 #drawUndoButton{
 	width: 40px;
-	padding-right: 5px
+	padding: 0px 10px;
+	margin-right: 30px;
+	/*margin-left: 25px;*/
 }
 
 .headerOption{
 	height: 100%;
-	line-height: 37px;
+	line-height: 52px;
 	font-size: 12px;
 
 }
 
+.vertSep{
+	margin: auto;
+	height: 75%;
+	width: 2px;
+	background: #BBB;
+}
+
+.drawingHeaderButton{
+	height: 90%;
+	width: 50px;
+}
+
+.drawingHeaderButton.active{
+	background: #f89300;
+	/*border: 2px solid black;*/
+	border-radius: 5px;
+}
+
+.drawingHeaderButton.active > *{
+	color: #ebebeb !important;
+}

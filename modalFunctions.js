@@ -128,7 +128,18 @@ function populateItemEdit(){
   let domSelectedItem = document.getElementById('selectedItem');
   let selectedItemColour = selectedItem.col;
   domSelectedItem.setAttribute("data-target", itemSelected);
-
+  domSelectedItem.classList.remove("itemBall");
+  domSelectedItem.classList.remove("itemCone");
+  domSelectedItem.classList.remove("itemPad");
+  domSelectedItem.innerHTML = '';
+  if (selectedItem.itemType === 0){
+    domSelectedItem.classList.add("itemBall");
+  } else if(selectedItem.itemType === 1){
+    domSelectedItem.classList.add("itemCone");
+    domSelectedItem.innerHTML = '<div class="coneInner"></div>';
+  } else if(selectedItem.itemType === 2){
+    domSelectedItem.classList.add("itemPad");
+  }
   let colorOptions = document.getElementById('colorOptionsItemEdit').children;
   let activeElem;
   for (i = 0; i < colorOptions.length; i++) {

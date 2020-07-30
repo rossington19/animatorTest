@@ -3,6 +3,23 @@
   user-select: none;
 }
 
+*:focus{
+  outline: none;
+}
+
+
+#canvasContainer{
+  background: #ebebeb;
+}
+
+#animatorContainer{
+  margin-top: 55px;
+  margin-left: 55px;
+  width: 900px;
+  height: 807px;
+  overflow: hidden;
+}
+
 
 #addActorModal{
   display: none;
@@ -10,14 +27,10 @@
 
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  position: absolute; 
   z-index: 1; /* Sit on top */
-  padding-top: 30px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  width: inherit;
+  height: 807px;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -26,6 +39,7 @@
 .modal-content {
   background-color: #fefefe;
   margin: auto;
+  margin-top: 100px;
   border: 1px solid #888;
   width: 80%;
   max-width: 500px;
@@ -65,14 +79,13 @@
 /*SIDE NAV*/
 /* The side navigation menu */
 .sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 2; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #ebebeb; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
+  height: 747px;
+  width: 150px;
+  top: -811px;
+  left: -150px;
+  position: relative;
+  z-index: 2;
+  background-color: #ebebeb;
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
@@ -103,9 +116,7 @@
 }
 
 #sideNavMenu{
-  left: -150px;
-  width: 150px;
-  display: block;
+
 }
 
 #sideNavMenuCover{
@@ -115,8 +126,11 @@
 /*Footer Buttons - Animation*/
 
 #animationButtonContainer{
-  position: absolute;
-  width: 100%;
+  /*position: absolute;*/
+  /*width: 100%;*/
+   width: inherit;
+   background: #ebebeb;
+   padding-bottom: 10px; 
 }
 
 #animationFlex{
@@ -139,18 +153,45 @@
   color: #777;
 }
 
+.animationButton > .buttonUnderText{
+  margin-top: 3px;
+}
+
 #speedTargetDropDown{
   background: none;
   height: 70%;
   border: none;
-  font-size: 17px;
-  margin-top: 5px;
-  width: 90px;
+  font-size: 20px;
+  margin-top: 8px;
+  width: 120px;
 }
+
+
+.headerPara{
+  color: #888;
+  font-size: 18px;
+  margin: auto 0;
+}
+
+#speedText{
+  margin-right: -20px;
+}
+
+#zoomText{
+   margin-right: 25px;
+}
+
+#pitchText{
+  margin-left: 25px;
+  margin-right: -20px;
+  font-size: 22px;
+}
+
+
 
 .headerSlider {
   -webkit-appearance: none;
-  width: 160px;
+  width: 550px;
   height: 5px;
   border-radius: 5px;
   background: #CCC;
@@ -167,4 +208,73 @@
   border-radius: 50%;
   border: 1px solid #999;
   background: #f89300;
+}
+
+
+.genButton > *{
+  transition: color 0.1s;
+}
+
+.genButton:hover, .genButton:hover > *{
+  transition: color 0.1s;
+    color: #f89300 !important;
+}
+
+.genButton:focus, .genButton:focus > *{
+  outline: none  !important;
+  border: none  !important;
+}
+
+.genButton:active{
+  transition: color 0s;
+  color: #f89300 !important;
+}
+
+.genButton:active > *{
+  transition: color 0.1s;
+  color: #c48425 !important;
+}
+
+#fileDraggedOver{
+  z-index: 999 !important;
+  pointer-events: none;
+}
+
+#addFileCont{
+  width: 300px;
+  height: 200px;
+  margin: auto;
+  margin-top: 250px;
+  text-align: center;
+}
+
+#fileAddIcon{
+  color: white;
+  font-size: 125px;
+}
+
+#fileAddText{
+  color: white;
+  margin-top: 30px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#exportedGIFContent{
+  height: 500px
+}
+
+#exportProcessText {
+  width: 100%;
+  text-align: center;
+  margin-top: 80px;
+  font-size: 40px;
+}
+
+#exportProcessPercentage{
+  width: 100%;
+  text-align: center;
+  font-size: 125px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

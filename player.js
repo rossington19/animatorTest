@@ -107,7 +107,7 @@ class Player {
       this.dragging = true;
       selected = this.index;
       if(!playing){ 
-        this.key[fixedKeyframe][2] = true; 
+        this.key[fixedKeyframe][2] = true;
       }
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;

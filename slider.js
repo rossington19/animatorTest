@@ -86,6 +86,9 @@ class Slider{
 		let keyFrameInt = Math.floor(keyframe);
 		animationLooped = false;
 		keyframe += (this.increment*this.frameIncrement[keyFrameInt]);
+		if(recorder && recorder.state === "recording"){
+			document.querySelector('#exportProcessPercentage').innerHTML = Math.round(map(keyframe, 0, totalKeyFrame-1, 0, 100, true)) + "%"
+		}
 		if (keyframe >= totalKeyFrame-1){
 			if(recorder && recorder.state === "recording"){
 				keyframe = totalKeyFrame-1;

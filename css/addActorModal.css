@@ -12,6 +12,10 @@
 	transition: 0.3s;
 }
 
+.modalTabButton:hover {
+	background: #CCC;
+}
+
 .modalTabButton.active {
 	background: #f89300;
 	/*border-bottom: 3px solid #555 ;*/
@@ -37,20 +41,61 @@
 	text-align: center;
 	border: 2px solid transparent;
 	padding-bottom: 3px;
+	border-radius: 5px;
+}
+
+.itemOption:hover{
+	background: #EEE;
+}
+
+.itemOption:hover > .itemImage  > .coneInner{
+	background: #EEE;
 }
 
 .itemOption.active {
 	border: 2px solid #f89300;
-	border-radius: 5px;
 }
 
 .itemImage{
 	height: 40px;
-	width: 20px;
+	width: 25px;
 	margin: 5px auto;
 	background-color: #ebebeb;
+	border: 2px solid black;
 }
 
 .itemName{
 
+}
+
+.itemBall{
+	border-radius: 50%
+}
+
+.itemCone{
+	border-radius: 100%;
+    width: 40px;
+    position: relative;
+}
+
+.coneInner{
+
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+ 	transform: translate(-50%, -50%);
+	border: 2px solid black;
+	border-radius: 100%;
+	background-color: #fefefe;
+
+}
+
+.itemPad{
+	width: 40px;
+    height: 22px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    border-radius: 10px
 }

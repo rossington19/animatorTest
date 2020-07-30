@@ -38,5 +38,5 @@ function pitchReleased(){
 
 function pitchZoom(){
 	let zoomSlider = document.getElementById("pitchZoomSlider");
-	pitchScale = map(zoomSlider.value, 1, 100, 0.1, 1.5);
+	pitchScale = map(zoomSlider.value, 1, 100, 0.15, 0.9);
 }

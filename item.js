@@ -79,7 +79,18 @@ class Item {
       circle(this.x, this.y, 11);
       pop()
     } else {
-      ellipse(this.x, this.y, 13, 19)
+      push();
+        let fixedKeyframe = Math.floor(keyframe);
+        if(fixedKeyframe === totalKeyFrame-1){
+          fixedKeyframe = totalKeyFrame - 2 ;
+        }
+        var vec = createVector(this.key[fixedKeyframe][0] - this.key[fixedKeyframe+1][0], this.key[fixedKeyframe][1] - this.key[fixedKeyframe+1][1]);
+        translate(this.x, this.y);
+        // translate(this.key[fixedKeyframe+1][0], this.key[fixedKeyframe+1][1]);
+        rotate(vec.heading());
+        ellipse(0, 0, 19, 13)
+        // ellipse(this.x, this.y, 13, 19)
+        pop();
     }
   }
 
