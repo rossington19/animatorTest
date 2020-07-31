@@ -4,7 +4,7 @@ function preload(){
 
 
 function setup() {
-	canvas = createCanvas(900, 550);
+	canvas = createCanvas(900, 500);
 	canvas.parent("canvasContainer");
 	canvas.id('drawingCanvas');
 	frameRate(240);
