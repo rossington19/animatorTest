@@ -19,8 +19,8 @@ canvas{
 }
 
 #animatorContainer{
-  margin-top: 55px;
-  margin-left: 55px;
+  margin: auto;
+  margin-top: 50px;
   width: 900px;
   height: 807px;
   overflow: hidden;
