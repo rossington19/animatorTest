@@ -5,7 +5,7 @@ class Player {
     this.displayNumber = num+10;
     this.x = 20 + num * 30;
     this.y = 100;
-    this.r = 30;
+    this.r = 28;
     this.col = 0;
     this.showLines = false;
     this.key = new Array();
@@ -59,7 +59,7 @@ class Player {
     circle(this.x, this.y, this.r)
     noStroke();
     textAlign(CENTER, CENTER);
-    textSize(23);
+    textSize(21);
     fill(255);
     if(this.col === 3 || this.col === 5){
       fill(0)

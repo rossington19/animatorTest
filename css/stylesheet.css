@@ -22,7 +22,7 @@ canvas{
   margin: auto;
   margin-top: 50px;
   width: 900px;
-  height: 807px;
+  height: 707px;
   overflow: hidden;
 }
 
@@ -36,7 +36,7 @@ canvas{
   position: absolute; 
   z-index: 1; /* Sit on top */
   width: inherit;
-  height: 807px;
+  height: 707px;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -45,7 +45,7 @@ canvas{
 .modal-content {
   background-color: #fefefe;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 80px;
   border: 1px solid #888;
   width: 80%;
   max-width: 500px;
@@ -85,9 +85,9 @@ canvas{
 /*SIDE NAV*/
 /* The side navigation menu */
 .sidenav {
-  height: 747px;
+  height: 647px;
   width: 150px;
-  top: -811px;
+  top: -711px;
   left: -150px;
   position: relative;
   z-index: 2;

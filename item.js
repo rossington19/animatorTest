@@ -4,7 +4,7 @@ class Item {
     this.rollover = false;
     this.x = width/2;
     this.y = height/2;
-    this.r = 19;
+    this.r = 16;
     this.col = 5;
     this.index = num;
     this.itemType = 0;
@@ -66,7 +66,7 @@ class Item {
     if(this.itemType === 2){
       push();
       rectMode(CENTER);
-      rect(this.x, this.y, 25, 13, 3  )
+      rect(this.x, this.y, 23, 11, 3  )
       pop();
     } else if (this.itemType === 1) {
       push();
@@ -88,7 +88,7 @@ class Item {
         translate(this.x, this.y);
         // translate(this.key[fixedKeyframe+1][0], this.key[fixedKeyframe+1][1]);
         rotate(vec.heading());
-        ellipse(0, 0, 19, 13)
+        ellipse(0, 0, 17, 11)
         // ellipse(this.x, this.y, 13, 19)
         pop();
     }
