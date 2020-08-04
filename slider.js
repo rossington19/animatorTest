@@ -6,7 +6,7 @@ class Slider{
 		this.dotXLoc = this.margin + keyframe*(this.lineLength/(totalKeyFrame-1));
 		this.dragged = false;
 		this.size = 20;
-		this.increment = 0.01;
+		this.increment = 0.02;
 		this.frameIncrement = Array(totalKeyFrame).fill(1);
 	}
 

@@ -1,10 +1,11 @@
 let pitchImg; // Declare variable 'pitchImg'.
+let logoOverlay;
 let pitch_xLoc = 0;
 let pitch_yLoc = 0;
 let pitchBeingDragged = false;
 let pitchLandscape = false
 let pitchMouseOffX, pitchMouseOffY;
-let pitchScale = 0.5;
+let pitchScale = 0.30;
 
 function drawPitch(){
 	push();
@@ -20,6 +21,8 @@ function drawPitch(){
 		image(pitchImg, pitch_xLoc, pitch_yLoc);
 	}
 	pop();
+	image(logoOverlay, 3, height-100);
+	logoOverlay.resize(191,47)
 }
 
 function pitchDragging(){
@@ -38,5 +41,5 @@ function pitchReleased(){
 
 function pitchZoom(){
 	let zoomSlider = document.getElementById("pitchZoomSlider");
-	pitchScale = map(zoomSlider.value, 1, 100, 0.15, 0.9);
+	pitchScale = map(zoomSlider.value, 1, 100, 0.17, 0.75);
 }

@@ -1,9 +1,10 @@
 class Item {
 	constructor(num) {
     this.dragging = false;
-    this.rollover = false;
-    this.x = width/2;
-    this.y = height/2;
+    let fact = Math.floor(num / 25)
+    let remain = num % 25;
+    this.x = 10 + remain * 30;
+    this.y = height - 125 - (fact * 35);
     this.r = 16;
     this.col = 5;
     this.index = num;
@@ -82,15 +83,18 @@ class Item {
       push();
         let fixedKeyframe = Math.floor(keyframe);
         if(fixedKeyframe === totalKeyFrame-1){
-          fixedKeyframe = totalKeyFrame - 2 ;
+          fixedKeyframe = totalKeyFrame - 2;
         }
         var vec = createVector(this.key[fixedKeyframe][0] - this.key[fixedKeyframe+1][0], this.key[fixedKeyframe][1] - this.key[fixedKeyframe+1][1]);
         translate(this.x, this.y);
-        // translate(this.key[fixedKeyframe+1][0], this.key[fixedKeyframe+1][1]);
-        rotate(vec.heading());
+       
+        if(this.key[fixedKeyframe+1][2] === false){
+          rotate(1.5708);
+        } else {
+          rotate(vec.heading());
+        }
         ellipse(0, 0, 17, 11)
-        // ellipse(this.x, this.y, 13, 19)
-        pop();
+      pop();
     }
   }
 
@@ -132,6 +136,9 @@ class Item {
   }
 
   released() {
+    if(this.dragging && autoSaving){
+      this.save();
+    }
     this.dragging = false;
   }
 

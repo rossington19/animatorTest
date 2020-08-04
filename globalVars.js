@@ -27,6 +27,7 @@ var animationLooped = false;
 var capturingGIF = false;
 
 var pitchMode = false;
+var autoSaving = true;
 
 // var buttonPlayAnimation, buttonSaveFrame;
 var colorPitch, colourRed, colourBlue, colourGreen, colourYellow, colourBlack, colourWhite, colourSliderDot;
@@ -48,3 +49,5 @@ var headerHeight = 0;
 var footerHeight = 50;
 
 var jsonFile;
+
+var tutorialPage = 0;

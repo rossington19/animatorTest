@@ -1,0 +1,104 @@
+#tutorialOverlay > * {
+	transition: 0.5s
+}
+
+#tutorialLogo{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 119px;
+}
+
+#tutorialHighlighter{
+    position: absolute;
+    border: 5px solid #f89300;
+	height: 100px;
+    width: 550px;
+    top: 230px;
+    left: 170px;
+    border-radius: 15px;
+    transition: .5s;
+    /*background: rgba(0,0,0,0.5)*/
+}
+
+#tutorialContentContainer{
+	height: 305px;
+	text-align: center;
+	padding-top: 55px;
+}
+
+#tutorialContentContainer > * {
+	color: white;
+    position: relative;
+}
+
+#tutorialButtonContainer{
+	display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin: auto;
+}
+
+.tutorialButton{
+	background: rgba(0,0,0,0.4);
+    color: white;
+    width: 150px;
+    height: 50px;
+    font-size: 19px;
+    border-radius: 10px;
+    border: 3px solid white;
+}
+
+.tutorialButton:hover{
+	background: rgba(255,255,255,0.05);
+	border-color:  #f89300;
+	color:  #f89300;
+	/*box-shadow: 0 0 5px  #f89300;*/
+}
+
+#tutorialTitle{
+	margin-top: 200px;
+    font-size: 50px;
+    transition: 0.8s;
+}
+
+#tutorialText {
+	position: absolute;
+	text-align: left;
+    border: 5px solid #f89300;
+    height: 100px;
+    width: 550px;
+    top: 230px;
+    left: 170px;
+    border-radius: 15px;
+    transition: .5s;
+    background: rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0);
+    padding: 0px;
+}
+
+#tutorialText > h3{
+	text-decoration: underline;
+}
+
+#tutorialSubtitle{
+	display: none;
+}
+
+#tutorialPrevButton {
+	display: none;
+}
+
+#tutorialClose{
+	transition: 0s;
+	display: none;
+	font-size: 40px;
+    position: absolute;
+    right: 50px;
+    top: 70px;
+    color: #f89300;;
+}
+
+#tutorialClose:hover {
+    color: #ce7e00;;
+}

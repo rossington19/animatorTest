@@ -2,9 +2,11 @@ class Player {
 	constructor(num) {
     this.dragging = false;
     this.index = num;
-    this.displayNumber = num+10;
-    this.x = 20 + num * 30;
-    this.y = 100;
+    this.displayNumber = num+1;
+    let fact = Math.floor(num / 25)
+    let remain = num % 25;
+    this.x = 20 + remain * 35;
+    this.y = 20 + (fact * 35);
     this.r = 28;
     this.col = 0;
     this.showLines = false;
@@ -64,7 +66,11 @@ class Player {
     if(this.col === 3 || this.col === 5){
       fill(0)
     }
-  	text(this.displayNumber, this.x-1, this.y+1);
+    if(this.displayNumber > 19){
+       text(this.displayNumber, this.x, this.y+1);
+    } else {
+  	   text(this.displayNumber, this.x-1, this.y+1);
+    }
   }
 
   drawLines(){
@@ -112,9 +118,13 @@ class Player {
       this.offsetX = this.x - mouseX;
       this.offsetY = this.y - mouseY;
     }
+
   }
 
   released() {
+    if(this.dragging && autoSaving){
+      this.save();
+    }
     this.dragging = false;
   }
 

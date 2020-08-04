@@ -24,7 +24,7 @@ function openSideNavMenu() {
 }
 
 function closeSideNavMenu() {
-  document.getElementById("sideNavMenu").style.left = "-150px";
+  document.getElementById("sideNavMenu").style.left = "-175px";
   document.getElementById("sideNavMenuCover").style.display = "none";
 }
 
@@ -42,7 +42,7 @@ function updateGlobalSliderIncrement(){
 	let selectedFrame = parseInt(dropDown.options[dropDown.selectedIndex].value);
 
 	if(selectedFrame === 0){	//Global
-		let newInc = map(speedInput.value, 1, 100, 0.004, 0.025);
+		let newInc = map(speedInput.value, 1, 100, 0.004, 0.05);
 		slider.increment = newInc;
 	} else {
 		slider.frameIncrement[selectedFrame-1]= map(speedInput.value, 1, 100, 0.2, 2)
@@ -74,7 +74,7 @@ function setSpeedSlider(){
 	let selectedFrame = parseInt(dropDown.options[dropDown.selectedIndex].value);
 	showSliderSpeedLoc = selectedFrame;
 	if(selectedFrame === 0){	//Global
-		speedInput.value = map(slider.increment, 0.004, 0.025, 1, 100);
+		speedInput.value = map(slider.increment, 0.004, 0.05, 1, 100);
 	} else {
 		speedInput.value = map(slider.frameIncrement[selectedFrame-1], 0.2, 2 , 1, 100)
 	}

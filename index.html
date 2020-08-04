@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="css/playerEditModal.css">
   <link rel="stylesheet" type="text/css" href="css/addActorModal.css">
   <link rel="stylesheet" type="text/css" href="css/headerMenus.css">
+  <link rel="stylesheet" type="text/css" href="css/tutorial.css">
   <link rel="stylesheet" type="text/css" href="css/all.css">
   <script src="p5.min.js"></script>
   <script src="globalVars.js"></script>
@@ -20,6 +21,7 @@
   <script src="player.js"></script>
   <script src="item.js"></script>
   <script src="pitch.js"></script>
+  <script src="tutorial.js"></script> 
   <script src="modalFunctions.js"></script>
   <script src="download.js"></script> 
   <script src="fileHandling.js"></script> 
@@ -29,6 +31,24 @@
 <body>
 <div id="animatorContainer">
   
+  <div id="tutorialOverlay" class="modal" onmousedown="event.stopPropagation()" style="display: block; z-index: 999 ">
+    <img src="https://raw.githubusercontent.com/rossington19/animatorTest/master/MainLogo.png" id="tutorialLogo">
+    <div id="tutorialClose" onclick="hideDomElement('tutorialOverlay'); closeSideNavMenu();">
+      <i class="fas fa-window-close"></i>
+    </div>
+    <div id="tutorialHighlighter"></div>
+    <div id="tutorialContentContainer">
+      <div id="tutorialText"></div>
+      <h1 id="tutorialTitle"> RugbySlate Animator</h1>
+      <h2 id="tutorialSubtitle">  How to Guide</h2>
+    </div>
+    <div id="tutorialButtonContainer">
+      <button class="tutorialButton" onclick="decrTutPage()" id="tutorialPrevButton">Previous</button>
+      <button class="tutorialButton" onclick="incrTutPage()" id="tutorialNextButton">Start Tutorial</button>
+      <button class="tutorialButton" onclick="hideDomElement('tutorialOverlay'); closeSideNavMenu();" id="tutorialSkip">Start Animating</button>
+    </div>
+  </div>
+
   <div id="fileDraggedOver" class="modal" onmousedown="event.stopPropagation()">
     <div id="addFileCont">
       <i id="fileAddIcon" class="fas fa-plus-circle"></i>
@@ -291,10 +311,16 @@
     <div class="headerMenuContainer" id="pitchHeaderMenu">
       <div class="headerMenuClose genButton" onclick="closeHeaderMenu('pitchHeaderMenu'); pitchMode = false">&times;</div>
       <p class="headerPara" id="pitchText"> Pitch: </p>
-      <button class="headerButton genButton" onclick="pitchLandscape = !pitchLandscape; console.log('Flipped')"> 
+      <button class="headerButton genButton" style="margin-right: -20px;" onclick=" pitch_xLoc = 0; pitch_yLoc = 0;"> 
+        <i class="far fa-dot-circle"></i>
+        <div class="buttonUnderText" style="margin-top: 0px;">Recenter</div>
+      </button>
+      <button class="headerButton genButton" onclick="pitchLandscape = !pitchLandscape;"> 
         <i class="fas fa-sync-alt"></i>
         <div class="buttonUnderText" style="margin-top: 0px;">Rotate</div>
       </button>
+
+      
       <p class="headerPara" id="zoomText"> Zoom: </p>
       <div class="headerOption">
         <input type="range" min="1" max="100" value="25" class="headerSlider" id="pitchZoomSlider" oninput="pitchZoom()">
@@ -321,12 +347,9 @@
      </div>
    </div>
    
-  
-
   <div id="canvasContainer">
     
-    
-
+  
   </div>
 
   <div id="animationButtonContainer">
@@ -339,25 +362,54 @@
           <i class="fas fa-play" id="playAnimationBut"></i>
           <div class="buttonUnderText" id="playAnimationText"> Play Animation </div>
         </button>
-        <button class="animationButton genButton" id="saveFrameBut" onclick="saveLocations()">
+        <button class="animationButton genButton" id="saveFrameBut" onclick="saveLocations()" disabled>
           <i class="far fa-save"></i>
-          <div class="buttonUnderText"> Save Frame </div>
+          <div class="buttonUnderText"> Autosaving On </div>
         </button>
       </div>
     </div>
 
   <div id="sideNavMenu" class="sidenav" onmousedown="event.stopPropagation()">
-    <a href="javascript:void(0)" class="closebtn genButton" onclick="closeSideNavMenu()">&times;</a>
-    <a class="genButton" onclick="openHeaderMenu('pitchHeaderMenu'); closeSideNavMenu(); pitchMode = true">Pitch</a>
-    <a class="genButton" onclick="saveFile()">Save</a>
-    <a class="genButton" onclick="document.getElementById('fileInput').click();">Load</a>
-    <a class="genButton" onclick="startRecordingCanvas(); closeSideNavMenu();">Export</a>
+    <a class="closebtn genButton" onclick="closeSideNavMenu()">&times;</a>
+    <a class="genButton sideNavButton" onclick="loadStartUpFile()">
+      <i class="far fa-file"></i>
+      <div class="sideNavText">New</div>
+    </a>
+    <a class="genButton sideNavButton" onclick="openHeaderMenu('pitchHeaderMenu'); closeSideNavMenu(); pitchMode = true">
+      <i class="far fa-edit"></i>
+      <div class="sideNavText">Pitch</div>
+    </a>
+    <a class="genButton sideNavButton" onclick="saveFile()">
+      <i class="fas fa-download"></i>
+      <div class="sideNavText">Save</div>
+    </a>
+    <a class="genButton sideNavButton" onclick="document.getElementById('fileInput').click();">
+      <i class="fas fa-upload"></i>
+      <div class="sideNavText">Load</div>
+    </a>
+    <a class="genButton sideNavButton"  onclick="startRecordingCanvas(); closeSideNavMenu();">
+      <i class="far fa-file-video"></i>
+      <div class="sideNavText">Export</div>
+    </a>
+
+    <div id="sideNavSeperator"></div>
+
+
+    <label class="switch" id="sidenavSwitch">
+      <a class="sideNavButton" id="autoSave" onclick="">
+          <input type="checkbox" checked id="autoSaveInput" onchange="autoSave();">
+          <span class="slider round" id="sideNavSlider"></span>
+        <div class="sideNavText" id="autoSaveText">Autosave Keyframes</div>
+      </a>
+    </label>
+
+    <a class="genButton sideNavButton" style="font-size: 22px; margin-top: 10px;"  onclick="">
+      <i class="fas fa-graduation-cap"></i>
+      <div class="sideNavText" onclick="closeSideNavMenu(); tutorialPage = 0; updateTutorial(); showDomElement('tutorialOverlay'); ">Tutorial</div>
+    </a>
+
+    <img src="https://raw.githubusercontent.com/rossington19/animatorTest/master/SideMenuLogo.png" style="width: 60px; margin-left: 57px; margin-top: 47px; opacity: 0.3;">
   </div>
-  
-
-  
-
-  
 
 </div>
 

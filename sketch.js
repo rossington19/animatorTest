@@ -1,5 +1,6 @@
 function preload(){
 	pitchImg = loadImage('https://raw.githubusercontent.com/rossington19/animatorTest/master/PitchLARGE.png');
+	logoOverlay = loadImage('https://raw.githubusercontent.com/rossington19/animatorTest/master/Background.png');
 }
 
 
@@ -9,16 +10,21 @@ function setup() {
 	canvas.id('drawingCanvas');
 	frameRate(240);
 	assignColors();
-	for(var i = 0; i < 6; i++){
+	for(var i = 0; i < 10; i++){
 		player.push(new Player(i));
 	}
-	items.push(new Item(0));
+	items.push(new Item(0));		
 	slider = new Slider();
 	setupHeader();
-	// setupBody();
 	setupFooter();
 	populateColorsOfOptions();
 	setupDropzone();
+	loadStartUpFile();
+}
+
+function loadStartUpFile(){
+	jsonFile = {"drawing":[],"player":[{"dragging":false,"index":0,"displayNumber":10,"x":206,"y":209,"r":28,"col":0,"showLines":false,"key":[[206,209,true],[206,209,false],[206,209,false],[206,209,false],[206,209,false]],"offsetX":-8.5,"offsetY":-5},{"dragging":false,"index":1,"displayNumber":"15","x":640,"y":421,"r":28,"col":0,"showLines":false,"key":[[640,421,true],[640,421,false],[640,421,false],[640,421,false],[640,421,false]],"offsetX":-7.5,"offsetY":-3},{"dragging":false,"index":2,"displayNumber":12,"x":352,"y":286,"r":28,"col":0,"showLines":false,"key":[[352,286,true],[352,286,false],[352,286,false],[352,286,false],[352,286,false]],"offsetX":-3.5,"offsetY":-3},{"dragging":false,"index":3,"displayNumber":13,"x":496,"y":352,"r":28,"col":0,"showLines":false,"key":[[496,352,true],[496,352,false],[496,352,false],[496,352,false],[496,352,false]],"offsetX":8.5,"offsetY":6}],"items":[{"dragging":false,"rollover":false,"x":205,"y":192,"r":16,"col":5,"index":0,"itemType":0,"key":[[205,192,true],[205,192,false],[205,192,false],[205,192,false],[205,192,false]],"offsetX":-5.5,"offsetY":4}],"totalKeyFrame":5,"frameIncrement":[1,1,1,1,1],"increment":0.02,"pitch_xLoc":0,"pitch_yLoc":1325,"pitchLandscape":false,"pitchScale":0.39848484848484844}
+	loadFile();
 }
 
 function draw() {
@@ -42,7 +48,7 @@ function mousePressed() {
 			startPath();
 		} else if(clickInsidePitch()){
 			let elem = document.getElementById('drawingPenColour');
-			let col = elem.getAttribute("data-color")
+			let col = elem.getAttribute("data-color");
 			drawing.push({'type': drawingType, 'data': [col, {"x": mouseX, "y": mouseY}, {"x": mouseX, "y": mouseY}], 'complete': false });
 		}
 	} else if (pitchMode && clickInsidePitch()) {
@@ -225,6 +231,18 @@ function deleteFrame(){
 	}
 }
 
+function autoSave(){
+	autoSaving = document.getElementById('autoSaveInput').checked;
+	let butElem = document.getElementById('saveFrameBut');
+	butElem.disabled = autoSaving		
+	if(autoSaving){
+		butElem.children[1].innerHTML = "Autosaving On"
+	} else {
+		butElem.children[1].innerHTML = "Save Frame";
+	}
+	
+}
+
 function keyPressed() {
 	if(recorder === undefined){
 	  checkKeyPress();
@@ -242,3 +260,4 @@ function checkKeyPress(){
 	  	keyframe += 1;
 	  }
 }
+
